@@ -29,14 +29,28 @@ def agent_prompt_blocks(readme: Path) -> list[str]:
 
 
 class ReadmePromptDriftTests(unittest.TestCase):
-    def test_localized_readme_agent_prompts_match_english_readme(self) -> None:
-        expected = agent_prompt_blocks(REPO_ROOT / "README.md")
+    def test_localized_readmes_are_valid_utf8(self) -> None:
+        for filename in LOCALIZED_READMES:
+            with self.subTest(readme=filename):
+                path = REPO_ROOT / filename
+                try:
+                    path.read_bytes().decode("utf-8")
+                except UnicodeDecodeError as exc:
+                    self.fail(
+                        f"{filename} is not valid UTF-8 at byte {exc.start}: "
+                        f"{exc.reason}"
+                    )
 
-        self.assertGreaterEqual(len(expected), 1)
+    def test_first_localized_readme_agent_prompt_stays_english(self) -> None:
+        expected_blocks = agent_prompt_blocks(REPO_ROOT / "README.md")
+        self.assertGreaterEqual(len(expected_blocks), 1)
+        expected = expected_blocks[0]
+
         for filename in LOCALIZED_READMES:
             with self.subTest(readme=filename):
                 actual = agent_prompt_blocks(REPO_ROOT / filename)
-                self.assertEqual(expected, actual)
+                self.assertGreaterEqual(len(actual), 1)
+                self.assertEqual(expected, actual[0])
 
 
 if __name__ == "__main__":

@@ -20,6 +20,13 @@ only the pieces that fit the target project's existing tools.
 Merge the scripts from `package-scripts.harness.json` into the target
 project's `package.json`.
 
+## Suggested Check Script
+
+Copy or adapt `check_harness.py` into the target repository's `scripts/`
+directory when the project has no existing task runner. It detects npm, pnpm,
+or yarn, then runs whichever of `lint`, `typecheck`, `test`, and `build` are
+already present in `package.json`, followed by the generic drift checks.
+
 ## ESLint Config
 
 Merge rules from `eslint.config.harness.mjs` into the target project's ESLint

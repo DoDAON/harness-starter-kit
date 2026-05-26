@@ -161,6 +161,7 @@ class ApplyHarnessTests(unittest.TestCase):
 
             profile_root = target / "docs" / "harness" / "profiles" / "react"
             self.assertTrue((profile_root / "README.md").exists())
+            self.assertTrue((profile_root / "check_harness.py").exists())
             self.assertTrue((profile_root / "eslint.config.harness.mjs").exists())
             self.assertTrue((profile_root / "package-scripts.harness.json").exists())
 
@@ -172,6 +173,7 @@ class ApplyHarnessTests(unittest.TestCase):
 
             profile_root = target / "docs" / "harness" / "profiles" / "vue"
             self.assertTrue((profile_root / "README.md").exists())
+            self.assertTrue((profile_root / "check_harness.py").exists())
             self.assertTrue((profile_root / "eslint.config.harness.mjs").exists())
             self.assertTrue((profile_root / "package-scripts.harness.json").exists())
 

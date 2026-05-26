@@ -7,11 +7,19 @@ only the pieces that fit the target project's existing tools.
 
 ## Recommended Checks
 
-- ESLint for linting
-- TypeScript compiler for type checking
-- dependency boundary rules for architecture constraints
-- unused export checks such as `ts-prune` or `knip`
-- package scripts that expose one local verification command
+- ESLint for linting.
+- TypeScript compiler for type checking.
+- Dependency boundary rules for architecture constraints.
+- Unused export checks such as `ts-prune` or `knip`.
+- `python scripts/check_harness.py` as a small local verification entrypoint
+  when the target project has no existing task runner.
+
+## Suggested Check Script
+
+Copy or adapt `check_harness.py` into the target repository's `scripts/`
+directory when the project has no existing task runner. It detects npm, pnpm,
+or yarn, then runs whichever of `lint`, `typecheck`, `test`, and `build` are
+already present in `package.json`, followed by the generic drift checks.
 
 ## Integration Notes
 

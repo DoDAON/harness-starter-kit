@@ -1,0 +1,11 @@
+{
+  "name": "react-basic-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "echo lint",
+    "typecheck": "echo typecheck",
+    "test": "echo test",
+    "build": "echo build"
+  }
+}

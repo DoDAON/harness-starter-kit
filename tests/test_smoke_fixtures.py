@@ -17,15 +17,36 @@ class FixtureSmokeTests(unittest.TestCase):
     scenarios = {
         "node-basic": (
             "typescript",
-            ("eslint.config.harness.mjs", "package-scripts.harness.json"),
+            (
+                "check_harness.py",
+                "eslint.config.harness.mjs",
+                "package-scripts.harness.json",
+            ),
         ),
         "nextjs-basic": (
             "nextjs",
             ("gitignore.harness.txt", "package-scripts.harness.json"),
         ),
         "django-basic": ("django", ("check_harness.py", "gitignore.harness.txt")),
+        "fastapi-basic": ("fastapi", ("check_harness.py", "gitignore.harness.txt")),
         "flask-basic": ("flask", ("check_harness.py", "gitignore.harness.txt")),
+        "react-basic": (
+            "react",
+            (
+                "check_harness.py",
+                "eslint.config.harness.mjs",
+                "package-scripts.harness.json",
+            ),
+        ),
         "spring-basic": ("spring", ("check_harness.py", "gitignore.harness.txt")),
+        "vue-basic": (
+            "vue",
+            (
+                "check_harness.py",
+                "eslint.config.harness.mjs",
+                "package-scripts.harness.json",
+            ),
+        ),
     }
 
     def run_installer(self, target: Path, profile: str) -> None:
