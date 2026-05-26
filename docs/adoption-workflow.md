@@ -11,7 +11,10 @@ edit it unless the user asks to change the kit itself.
 
 If the user asks for `/harness doctor`, run the diagnostic command in
 `commands/harness-doctor.md` instead of the adoption workflow. Harness Doctor
-scores readiness and recommends next actions; it does not modify files.
+scores readiness and recommends next actions; it does not modify files. During
+that diagnostic flow, do not remove a target-local `./harness-starter-kit`
+directory. Only temporary clones created outside the target repository may be
+cleaned up without asking.
 
 ## 1. Read The Target Repository
 

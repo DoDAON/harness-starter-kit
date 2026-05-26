@@ -45,7 +45,7 @@ When an agent is applying the kit from this nested layout:
 
 When the user asks for `/harness doctor`, run the diagnostic workflow in
 `commands/harness-doctor.md`. It must inspect and report only; it must not
-modify files.
+modify files or remove a target-local `./harness-starter-kit` directory.
 
 Run these checks after changing installer behavior, templates, or drift scripts:
 

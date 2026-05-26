@@ -6,6 +6,11 @@ AI coding agent collaboration.
 Harness Doctor is diagnostic only. Do not create, edit, delete, move, format, or
 stage files while running this command.
 
+Do not remove a nested `./harness-starter-kit` directory from the target
+repository while running this command. If you created a temporary clone outside
+the target repository, such as under `/tmp`, you may remove only that temporary
+copy after the report is complete.
+
 ## Goal
 
 Inspect the repository and produce a Harness Score out of 100. The score should
@@ -20,12 +25,15 @@ Use this principle when judging the repository:
 
 1. Treat the current working directory as the target repository root.
 2. Inspect durable repository files, not chat context.
-3. Read likely harness files:
+3. If `./harness-starter-kit` exists, treat it as read-only reference material.
+   Do not delete it, ignore it, move it, or clean it up as part of the doctor
+   run.
+4. Read likely harness files:
    - `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*`, `.github/copilot-instructions.md`
    - `README.md`, `CONTRIBUTING.md`, project docs, and CI configs
    - `docs/decisions`, `docs/failures`, `docs/conventions`, and `docs/domain`
    - `scripts/`, package manager config, test config, lint config, and pre-commit config
-4. If available, run a baseline scan:
+5. If available, run a baseline scan:
 
    ```bash
    python scripts/harness_doctor.py --target .
@@ -34,8 +42,8 @@ Use this principle when judging the repository:
    Treat this script output as objective baseline evidence only. You must still
    review content quality and enforceability yourself.
 
-5. Score the repository across the five categories below.
-6. Produce the required report format.
+6. Score the repository across the five categories below.
+7. Produce the required report format.
 
 ## Scoring Rules
 
@@ -112,3 +120,8 @@ Recommended Next Actions:
 Before answering, confirm that your report names repository evidence for every
 major score decision. The report should help the maintainer decide what durable
 harness artifact to add next.
+
+Also confirm that you did not modify the target repository. If you used a
+temporary clone outside the target repository and removed it, say that
+explicitly. Do not describe removal of `./harness-starter-kit` as cleanup unless
+the user explicitly asked for that deletion.
