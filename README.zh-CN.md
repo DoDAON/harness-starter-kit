@@ -266,9 +266,12 @@ test/build script 和 React-specific lint rule 的参考片段。
 当目标项目是 Vue 应用时，选择 `vue`。它会添加面向 ESLint、`vue-tsc`、
 test/build script 和 Vue-specific lint rule 的参考片段。
 
-这些 profile 有意保持保守，是参考材料，而不是自动项目转换。installer 会把
-profile 文件复制到 `docs/harness/profiles/<profile>/` 下，方便代理或 maintainer
-在保留目标项目现有构建系统的同时，只 merge、adapt 或 ignore 合适的片段。
+这些 profile 有意保持保守，是参考材料，而不是自动项目转换。在 prompt-first
+adoption 中，agent 会读取
+`./harness-starter-kit/templates/profiles/<profile>/` 下的 profile template。
+如果使用 optional installer，profile snippet 会复制到 target repository 的
+`docs/harness/profiles/<profile>/` 下，方便代理或 maintainer 在保留目标项目现有
+构建系统的同时，只 merge、adapt 或 ignore 合适的片段。
 
 ## 安装和 Drift Check 覆盖范围
 
@@ -303,6 +306,19 @@ python -m unittest tests.test_fastapi_profile_e2e
 
 在 GitHub Actions 中，手动运行 `Harness Check` workflow 并启用
 `run_fastapi_e2e`，即可执行同一个 dependency-installing test。
+
+## Lifecycle Pilot Results
+
+Pilot lifecycle tests 已验证从 blank repository 到 minimal Django 和 Next.js
+project 的 prompt-first adoption。这些测试验证了 generic-first adoption、随后
+的 stack-specific profile absorption、已填写的 measurement plan，以及可运行的
+local checks。Next.js pilot 还验证了删除 local kit clone 后的 cleanup 和 Git
+hygiene。
+
+这些 pilot 验证的是 adoption behavior 和 measurement readiness。它们不能证明
+harness adoption 减少了重复出现的 agent mistake；这需要后续 comparable task
+run。摘要见
+[`docs/examples/lifecycle-pilot-results.md`](docs/examples/lifecycle-pilot-results.md)。
 
 ## 效果测量
 

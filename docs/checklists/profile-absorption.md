@@ -20,8 +20,11 @@ Run this checklist when:
 
 ## 1. Pick The Closest Profile
 
-- [ ] Identify the closest profile under `docs/harness/profiles/<profile>/` or
-      `harness-starter-kit/templates/profiles/<profile>/`.
+- [ ] If the kit was cloned into the target repository, identify the closest
+      profile under `harness-starter-kit/templates/profiles/<profile>/`.
+- [ ] If `scripts/apply_harness.py` copied profile snippets into the target
+      repository, review the copied snippets under
+      `docs/harness/profiles/<profile>/`.
 - [ ] If no profile fits, use `generic` and document the missing profile need in
       the adoption report or `docs/decisions/`.
 - [ ] Treat the target repository's existing tools as source of truth.

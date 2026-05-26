@@ -19,6 +19,7 @@ This map connects harness engineering concepts to files in a target repository.
 | Profile absorption | checklist for turning profile snippets into project rules | `docs/checklists/profile-absorption.md` |
 | Adoption report example | final adoption summary | `docs/templates/adoption-report.md`, `examples/*-adoption-report.md` |
 | Effectiveness evaluation | agent mistake reduction measurement | `docs/evaluation.md`, `docs/templates/effectiveness-report.md` |
+| Lifecycle pilot results | prompt-first adoption behavior evidence | `docs/examples/lifecycle-pilot-results.md` |
 
 ## Minimum Useful Adoption
 

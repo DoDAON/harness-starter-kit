@@ -59,9 +59,12 @@ When a decision or rejected approach becomes relevant, add a short record to the
 appropriate directory.
 
 When a new stack, framework, build tool, UI layer, API layer, or test runner is
-introduced after generic adoption, review the closest profile under
-`docs/harness/profiles/<profile>/` if present. Decide which profile snippets to
-adopt, adapt, skip, or defer, then report those choices before finishing.
+introduced after generic adoption, review the closest profile. If the kit is
+still present as a reference clone, read
+`harness-starter-kit/templates/profiles/<profile>/`; if the installer copied
+snippets into this repository, read `docs/harness/profiles/<profile>/`. Decide
+which profile snippets to adopt, adapt, skip, or defer, then report those
+choices before finishing.
 
 When harness rules, checks, CI, architecture boundaries, or agent-facing docs
 change, update the effectiveness measurement plan in the adoption report or the

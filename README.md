@@ -294,10 +294,12 @@ build output ignores, local config ignores, and a Python `check_harness.py`
 entrypoint.
 
 Profiles are intentionally conservative reference material for the agent. They
-are not automatic project transformations. The installer copies profile files
-under `docs/harness/profiles/<profile>/` so an agent or maintainer can merge,
-adapt, or ignore the relevant snippets while preserving the target project's
-existing build system.
+are not automatic project transformations. During prompt-first adoption, the
+agent reads profile templates from
+`./harness-starter-kit/templates/profiles/<profile>/`. If the optional installer
+is used, it copies profile snippets into the target repository under
+`docs/harness/profiles/<profile>/` so an agent or maintainer can merge, adapt,
+or ignore them while preserving the target project's existing build system.
 
 The generic drift checks are baseline hygiene checks:
 
@@ -358,6 +360,20 @@ See `examples/node-adoption-report.md` and
 `examples/nextjs-adoption-report.md`, `examples/django-adoption-report.md`, or
 `examples/flask-adoption-report.md` for example adoption reports. See
 `examples/spring-adoption-report.md` for a Spring example.
+
+## Lifecycle Pilot Results
+
+Pilot lifecycle tests have validated prompt-first adoption from blank
+repositories into minimal Django and Next.js projects. These tests verified
+generic-first adoption, later stack-specific profile absorption, filled
+measurement plans, and runnable local checks. The Next.js pilot also verified
+post-adoption cleanup and Git hygiene after removing the local kit clone.
+
+These pilots validate adoption behavior and measurement readiness. They do not
+prove that harness adoption reduces repeated agent mistakes; that requires
+follow-up comparable task runs. See
+[`docs/examples/lifecycle-pilot-results.md`](docs/examples/lifecycle-pilot-results.md)
+for the pilot summary.
 
 ## Effectiveness Measurement
 

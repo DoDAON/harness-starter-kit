@@ -296,9 +296,12 @@ test/build script, React-specific lint rule을 위한 참고 스니펫을 추가
 script, Vue-specific lint rule을 위한 참고 스니펫을 추가합니다.
 
 프로필은 의도적으로 보수적인 참고 자료입니다. 자동 프로젝트 변환이 아닙니다.
-installer는 profile 파일을 `docs/harness/profiles/<profile>/` 아래에 복사하므로,
-에이전트나 maintainer가 대상 프로젝트의 기존 빌드 시스템을 보존하면서 필요한
-스니펫만 merge, adapt, ignore할 수 있습니다.
+prompt-first adoption 중에는 agent가
+`./harness-starter-kit/templates/profiles/<profile>/`의 profile template을
+읽습니다. optional installer를 사용하면 profile snippet이 target repository의
+`docs/harness/profiles/<profile>/` 아래로 복사되므로, 에이전트나 maintainer가
+대상 프로젝트의 기존 빌드 시스템을 보존하면서 필요한 스니펫만 merge, adapt,
+ignore할 수 있습니다.
 
 generic drift check는 baseline hygiene check입니다.
 
@@ -348,6 +351,20 @@ python -m unittest tests.test_fastapi_profile_e2e
 
 GitHub Actions에서는 `Harness Check` workflow를 수동 실행하고
 `run_fastapi_e2e`를 켜면 같은 dependency-installing test가 실행됩니다.
+
+## Lifecycle Pilot Results
+
+Pilot lifecycle test는 blank repository에서 시작해 minimal Django 및 Next.js
+project로 전환하는 prompt-first adoption을 검증했습니다. 이 테스트는
+generic-first adoption, 이후 stack-specific profile absorption, 채워진
+measurement plan, 실행 가능한 local check를 확인했습니다. Next.js pilot은 local
+kit clone 제거 후 cleanup과 Git hygiene도 확인했습니다.
+
+이 pilot은 adoption behavior와 measurement readiness를 검증합니다. harness
+adoption이 반복 agent mistake를 줄였다는 증거는 아닙니다. 그 효과는 후속
+comparable task run이 필요합니다. 요약은
+[`docs/examples/lifecycle-pilot-results.md`](docs/examples/lifecycle-pilot-results.md)를
+참고하세요.
 
 ## 효과 측정
 

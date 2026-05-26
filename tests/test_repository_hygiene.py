@@ -61,6 +61,37 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("They do not prove", readme)
         self.assertIn("docs/evaluation.md", readme)
 
+    def test_profile_reference_paths_distinguish_clone_from_installer_output(
+        self,
+    ) -> None:
+        adoption_workflow = (REPO_ROOT / "docs" / "adoption-workflow.md").read_text(
+            encoding="utf-8"
+        )
+        profile_checklist = (
+            REPO_ROOT / "docs" / "checklists" / "profile-absorption.md"
+        ).read_text(encoding="utf-8")
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+
+        for text in (adoption_workflow, profile_checklist, readme):
+            self.assertIn("harness-starter-kit/templates/profiles/<profile>", text)
+            self.assertIn("docs/harness/profiles/<profile>", text)
+
+        self.assertIn("cloned kit", adoption_workflow)
+        self.assertIn("optional installer", readme)
+
+    def test_lifecycle_pilot_results_are_documented_without_effectiveness_claims(
+        self,
+    ) -> None:
+        pilot_results = (
+            REPO_ROOT / "docs" / "examples" / "lifecycle-pilot-results.md"
+        ).read_text(encoding="utf-8")
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("Blank to Django", pilot_results)
+        self.assertIn("Blank to Next.js", pilot_results)
+        self.assertIn("not reduced agent error rates", pilot_results)
+        self.assertIn("docs/examples/lifecycle-pilot-results.md", readme)
+
 
 if __name__ == "__main__":
     unittest.main()

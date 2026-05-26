@@ -45,6 +45,10 @@ Rules:
   explicitly ask.
 - Treat any stack profile files as reference snippets for you to adapt, not as
   automatic changes that must be copied into the project.
+- During prompt-first adoption, read profile templates from
+  ./harness-starter-kit/templates/profiles/<profile>/. If installer-generated
+  snippets already exist in this target repository, review them under
+  docs/harness/profiles/<profile>/.
 - Before finishing, tell me whether ./harness-starter-kit should be removed,
   ignored, or kept intentionally as a submodule/reference before I commit.
 

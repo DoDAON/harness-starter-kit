@@ -94,9 +94,12 @@ Match constraints to the stack:
   by Next itself
 - Any stack: CI checks, formatting checks, forbidden-file scans
 
-Profile files are agent reference material, not automatic transformations.
-Use snippets from `docs/harness/profiles/<profile>/` only when they fit the
-target repository's existing tools and conventions.
+Profile files are agent reference material, not automatic transformations. When
+using a cloned kit during prompt-first adoption, read snippets from
+`./harness-starter-kit/templates/profiles/<profile>/`. When using
+`scripts/apply_harness.py`, copied profile snippets land in the target
+repository under `docs/harness/profiles/<profile>/`. In both cases, adopt only
+the snippets that fit the target repository's existing tools and conventions.
 
 Prefer existing tools when possible.
 
