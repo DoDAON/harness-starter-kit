@@ -21,6 +21,24 @@ directory when the project has no existing task runner. It detects npm, pnpm,
 or yarn, then runs whichever of `lint`, `typecheck`, `test`, and `build` are
 already present in `package.json`, followed by the generic drift checks.
 
+## Profile Absorption Notes
+
+When JavaScript or TypeScript is introduced after generic adoption:
+
+- Merge useful scripts from `package-scripts.harness.json` into `package.json`
+  instead of replacing the target's scripts.
+- Merge ESLint rules from `eslint.config.harness.mjs` only when the target
+  already uses ESLint or intentionally adopts it.
+- Keep the target package manager as source of truth; do not add npm, pnpm, or
+  yarn only because this profile mentions them.
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Update `AGENTS.md` with the chosen package manager and check commands.
+- Update `docs/conventions/coding.md` with module layout, import, testing, and
+  type-checking conventions that agents should repeat.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## Integration Notes
 
 Do not replace existing ESLint or package manager configuration blindly. Merge

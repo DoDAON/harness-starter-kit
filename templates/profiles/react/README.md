@@ -34,6 +34,28 @@ config. The snippet enables `eslint-plugin-react-hooks` and
 `eslint-plugin-react-refresh`, which are the most impactful React-specific
 rules.
 
+## Profile Absorption Notes
+
+When React is introduced after generic adoption:
+
+- Merge useful scripts from `package-scripts.harness.json` into `package.json`
+  instead of replacing the target's scripts.
+- Merge relevant ignores from `gitignore.harness.txt`, especially generated
+  build output, dependency directories, local env files, and the local
+  `harness-starter-kit/` clone.
+- Merge React ESLint rules only when the target already uses ESLint or
+  intentionally adopts it.
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Update `AGENTS.md` with React commands, source directories, generated paths,
+  and completion checks.
+- Update `docs/conventions/coding.md` with component, hook, state, routing,
+  styling, and testing conventions.
+- Add a decision record when choosing React, a routing approach, or a state
+  management approach is an architectural decision.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## React Notes
 
 - Name components in PascalCase; name hooks with the `use` prefix.

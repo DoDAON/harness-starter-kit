@@ -31,6 +31,26 @@ The script excludes generated harness profile snippets and local virtual
 environments from mypy by default so copied reference files do not create
 duplicate-module noise.
 
+## Profile Absorption Notes
+
+When FastAPI is introduced after generic adoption:
+
+- Merge useful settings from `pyproject.harness.toml` into the target
+  `pyproject.toml` instead of replacing existing configuration.
+- Merge relevant ignores from `gitignore.harness.txt`, especially virtual
+  environments, generated Python caches, test caches, and the local
+  `harness-starter-kit/` clone.
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Update `AGENTS.md` with FastAPI commands, app entrypoints, source
+  directories, generated paths, and completion checks.
+- Update `docs/conventions/coding.md` with router, dependency injection,
+  schema, service, repository, testing, and error handling conventions.
+- Add a decision record when choosing FastAPI, an app layout, persistence
+  approach, or migration tool is an architectural decision.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## FastAPI Notes
 
 - Define routes in router modules; keep business logic in a services layer and

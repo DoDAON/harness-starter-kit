@@ -32,6 +32,28 @@ already present in `package.json`, followed by the generic drift checks.
 Merge rules from `eslint.config.harness.mjs` into the target project's ESLint
 config. The snippet enables `eslint-plugin-vue` with Vue 3 recommended rules.
 
+## Profile Absorption Notes
+
+When Vue or Vite is introduced after generic adoption:
+
+- Merge useful scripts from `package-scripts.harness.json` into `package.json`
+  instead of replacing the target's scripts.
+- Merge relevant ignores from `gitignore.harness.txt`, especially `.vite/`,
+  `dist/`, `node_modules/`, local env files, and the local
+  `harness-starter-kit/` clone.
+- Merge Vue ESLint rules only when the target already uses ESLint or
+  intentionally adopts it.
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Update `AGENTS.md` with Vue/Vite commands, source directories, generated
+  paths, and completion checks.
+- Update `docs/conventions/coding.md` with component, state, routing, styling,
+  and testing conventions.
+- Add a decision record when choosing Vue/Vite, a routing approach, or a state
+  management approach is an architectural decision.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## Vue Notes
 
 - Prefer script setup syntax with the Composition API for new components.
