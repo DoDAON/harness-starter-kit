@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Copy harness-starter-kit into a target repository."""
+"""Bootstrap a generic harness skeleton into a target repository.
+
+This script does not perform full harness adoption. For real adoption, use the
+prompt-first workflow so an agent can inspect and adapt to the target repo.
+"""
 
 from __future__ import annotations
 
@@ -42,7 +46,10 @@ class CopyResult:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Install harness-starter-kit into a target repo."
+        description=(
+            "Bootstrap generic harness skeleton files into a target repo. "
+            "Full harness adoption is prompt-first and agent-driven."
+        )
     )
     parser.add_argument(
         "--target",
@@ -74,7 +81,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Show planned changes without writing files.",
+        help="Show skeleton files that would be written without writing files.",
     )
     parser.add_argument(
         "--force",
@@ -84,7 +91,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--with-ci",
         action="store_true",
-        help="Also install the optional GitHub Actions harness workflow.",
+        help="Also copy the optional GitHub Actions harness workflow skeleton.",
     )
     return parser.parse_args()
 

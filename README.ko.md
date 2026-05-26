@@ -33,7 +33,9 @@
 [English](README.md) | **한국어** | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
 `harness-starter-kit`은 모든 소프트웨어 프로젝트에 harness engineering을
-적용하기 위한 스타터 키트입니다.
+적용하기 위한 prompt-first 스타터 키트입니다. 대상 저장소 안에 클론한 뒤
+에이전트가 읽고, 그 저장소의 실제 도구와 제약에 맞게 적용하도록 설계되어
+있습니다.
 
 기본 사용 흐름은 단순합니다.
 
@@ -44,7 +46,9 @@ to this repo. Preserve the existing architecture and add only the minimum
 missing harness files."
 ```
 
-대상 프로젝트에는 실용적인 에이전트 harness가 생겨야 합니다.
+이 프로젝트는 자동 설치기가 주된 형태가 아닙니다. 에이전트가 대상 저장소를
+검사하고 가장 작은 유용한 durable artifact 집합을 추가했을 때, 대상
+프로젝트에는 실용적인 에이전트 harness가 생겨야 합니다.
 
 - 지속 가능한 에이전트 지침을 위한 `AGENTS.md`
 - lint, type check, import boundary, 프로젝트별 규칙을 통한 아키텍처 제약
@@ -74,7 +78,12 @@ workspace/
     `-- existing-project-files
 ```
 
-그 다음 대상 저장소를 코딩 에이전트로 열고 이 프롬프트를 주세요.
+그 다음 `target-repo`를 코딩 에이전트로 여세요.
+`target-repo/harness-starter-kit`가 아니라 대상 저장소 루트가 작업
+디렉터리입니다. 중첩된 `harness-starter-kit/` 디렉터리는 읽기 전용 참고
+자료입니다.
+
+에이전트에게 이 프롬프트를 주세요.
 
 ```text
 Read ./harness-starter-kit first, then apply the harness engineering starter kit
@@ -93,15 +102,31 @@ Finish with a short adoption report listing files changed, checks I can run,
 assumptions made, and remaining manual steps.
 ```
 
-설치 스크립트를 직접 실행하고 싶다면 먼저 생성될 파일을 확인하세요.
+prompt-first workflow가 이 키트의 기본 사용법입니다. 에이전트가 대상 저장소의
+stack, package manager, test/lint command, 기존 문서, agent instruction file,
+CI, 저장소 구조를 먼저 검사하고 그 결과에 맞게 적용할 수 있기 때문입니다.
+
+커밋하기 전에는 로컬 `harness-starter-kit/` clone을 제거할지, 대상
+`.gitignore`에 추가할지, 의도적으로 submodule/reference로 유지할지 결정하세요.
+중첩 clone을 일반 프로젝트 파일처럼 실수로 커밋하지 마세요.
+
+### 선택 사항: Skeleton Bootstrap
+
+`apply_harness.py`는 skeleton bootstrapper입니다. full harness adoption
+engine이 아닙니다. generic starter file과 profile reference snippet을 만들 뿐,
+대상 저장소의 아키텍처를 검사하거나 병합하거나 검증하지 않습니다.
+
+에이전트 주도 적용 전에 빠른 초기 파일 구조가 필요할 때만 사용하세요. 먼저
+생성될 파일을 확인합니다.
 
 ```powershell
 python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
 
 이 스크립트는 `--force`를 제공하지 않는 한 기존 파일을 덮어쓰지 않습니다.
-기본 설치는 로컬 harness 파일만 추가합니다. 대상 저장소에 선택 사항인 GitHub
-Actions harness workflow도 추가해야 할 때만 `--with-ci`를 사용하세요.
+기본 설치는 로컬 harness skeleton file만 추가합니다. 대상 저장소에 선택
+사항인 GitHub Actions harness workflow도 추가해야 할 때만 `--with-ci`를
+사용하세요.
 
 ```powershell
 python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --with-ci
@@ -109,24 +134,33 @@ python harness-starter-kit/scripts/apply_harness.py --target . --profile generic
 
 ## 에이전트 주도 적용
 
-새 프로젝트나 기존 프로젝트에서 코딩 에이전트에게 다음 프롬프트를 주세요.
+새 프로젝트나 기존 프로젝트에서 실제 적용 경로는 에이전트 주도 방식입니다.
+에이전트는 먼저 검사하고, 그 다음 적용하고, 마지막에 결과를 보고해야 합니다.
+코딩 에이전트에게 다음 프롬프트를 주세요.
 
 ```text
 Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Requirements:
+- Inspect the target repository before editing.
+- Identify the language, framework, package manager, test command, lint command,
+  build command, CI provider, docs structure, and monorepo layout if present.
+- Read existing AGENTS.md, CLAUDE.md, README, CONTRIBUTING, and CI configs if
+  they exist.
 - Preserve existing architecture, tools, and conventions.
 - Add or update AGENTS.md with project-specific rules.
 - Add docs/decisions, docs/failures, docs/conventions, and docs/domain if they
-  are missing.
-- Add drift checks under scripts/ and wire them into the closest existing
-  verification path.
+  are missing and no equivalent knowledge store exists.
+- Add lightweight drift checks under scripts/ only when they reflect real target
+  repo rules, then wire stable checks into the closest existing verification
+  path.
 - Prefer existing linters, tests, CI, and package managers over introducing new
   ones.
 - Do not overwrite existing files without explaining why.
-- Finish with a short report listing files changed, checks added, and remaining
-  manual integration steps.
+- Finish with a short report listing files changed, checks added, assumptions,
+  remaining manual integration steps, and what to do with ./harness-starter-kit
+  before committing.
 ```
 
 더 긴 버전은
@@ -194,6 +228,19 @@ script, Vue-specific lint rule을 위한 참고 스니펫을 추가합니다.
 installer는 profile 파일을 `docs/harness/profiles/<profile>/` 아래에 복사하므로,
 에이전트나 maintainer가 대상 프로젝트의 기존 빌드 시스템을 보존하면서 필요한
 스니펫만 merge, adapt, ignore할 수 있습니다.
+
+generic drift check는 baseline hygiene check입니다.
+
+- `scripts/check_docs_drift.py`는 문서의 깨진 로컬 Markdown link와 오래된 파일
+  참조를 잡습니다.
+- `scripts/check_structure.py`는 임시 파일과 drift-prone filename을 잡습니다.
+
+유용한 architecture drift check는 대상 저장소의 실제 규칙에서 나와야 합니다.
+예를 들어 `AGENTS.md`가 route에서 DB 직접 접근을 금지한다면 route file의 DB
+import를 금지하는 check를 추가하세요. ADR이 Redux 대신 Zustand를 선택했다면
+Redux dependency가 들어올 때 실패하는 check를 추가하세요. generated file이 한
+디렉터리에만 있어야 한다면 다른 위치의 generated file을 거부하는 structure
+rule을 추가하세요.
 
 ## 테스트된 시나리오
 

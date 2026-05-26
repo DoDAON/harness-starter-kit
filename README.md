@@ -35,8 +35,10 @@
 [Site](https://baskduf.github.io/harness-starter-kit/) |
 [Adoption prompt](docs/prompts/apply-to-target-repo.md)
 
-`harness-starter-kit` is a starter kit for applying harness engineering to any
-software project.
+`harness-starter-kit` is a prompt-first starter kit for applying harness
+engineering to any software project. It is meant to be cloned into a target
+repository, read by an agent, and adapted to that repository's actual tools and
+constraints.
 
 The intended workflow is simple:
 
@@ -47,7 +49,9 @@ to this repo. Preserve the existing architecture and add only the minimum
 missing harness files."
 ```
 
-The target project should end up with a practical agent harness:
+This is not primarily an automatic installer. The target project should end up
+with a practical agent harness because an agent inspected the repository and
+added the smallest useful set of durable artifacts:
 
 - `AGENTS.md` for durable agent instructions
 - architecture constraints through linting, type checks, import boundaries, or
@@ -79,7 +83,10 @@ workspace/
 ```
 
 Then open `target-repo`, not `target-repo/harness-starter-kit`, with your
-coding agent and give it this prompt:
+coding agent. The target repository is the working directory; the nested
+`harness-starter-kit/` directory is read-only reference material.
+
+Give the agent this prompt:
 
 ```text
 Read ./harness-starter-kit first, then apply the harness engineering starter kit
@@ -99,22 +106,33 @@ assumptions made, and remaining manual steps.
 ```
 
 The prompt-first workflow is the main way to use this kit because the agent can
-inspect the target repository and adapt to its existing tools.
+inspect the target repository and adapt to its existing tools. During adoption,
+the agent should inspect the stack, package manager, test and lint commands,
+existing docs, agent instruction files, CI, and repository layout before
+editing.
 
 Before committing the target repository, decide what to do with the local
 `harness-starter-kit/` clone: remove it, add it to the target `.gitignore`, or
 keep it intentionally as a submodule/reference. Do not accidentally commit the
 nested clone as ordinary project content.
 
-If you want a mechanical bootstrap instead, preview the generated files first:
+### Optional Skeleton Bootstrap
+
+`apply_harness.py` is a skeleton bootstrapper, not a full harness adoption
+engine. It creates generic starter files and profile reference snippets. It does
+not inspect, merge, or validate the target repository's architecture.
+
+Use it only when you want a quick initial file structure before agent-driven
+adaptation. Preview the generated files first:
 
 ```powershell
 python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
 
-The script never overwrites existing files unless `--force` is provided.
-By default it installs local harness files only; add `--with-ci` when the target
-repository should also receive the optional GitHub Actions harness workflow.
+The script never overwrites existing files unless `--force` is provided. By
+default it installs local harness skeleton files only; add `--with-ci` only when
+the target repository should also receive the optional GitHub Actions harness
+workflow.
 
 ```powershell
 python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --with-ci
@@ -122,24 +140,33 @@ python harness-starter-kit/scripts/apply_harness.py --target . --profile generic
 
 ## Agent-Driven Adoption
 
-In a new or existing project, give your coding agent this prompt:
+In a new or existing project, the agent-driven path is the real adoption path.
+The agent should inspect first, adapt second, and report the result. Give your
+coding agent this prompt:
 
 ```text
 Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Requirements:
+- Inspect the target repository before editing.
+- Identify the language, framework, package manager, test command, lint command,
+  build command, CI provider, docs structure, and monorepo layout if present.
+- Read existing AGENTS.md, CLAUDE.md, README, CONTRIBUTING, and CI configs if
+  they exist.
 - Preserve existing architecture, tools, and conventions.
 - Add or update AGENTS.md with project-specific rules.
 - Add docs/decisions, docs/failures, docs/conventions, and docs/domain if they
-  are missing.
-- Add drift checks under scripts/ and wire them into the closest existing
-  verification path.
+  are missing and no equivalent knowledge store exists.
+- Add lightweight drift checks under scripts/ only when they reflect real target
+  repo rules, then wire stable checks into the closest existing verification
+  path.
 - Prefer existing linters, tests, CI, and package managers over introducing new
   ones.
 - Do not overwrite existing files without explaining why.
-- Finish with a short report listing files changed, checks added, and remaining
-  manual integration steps.
+- Finish with a short report listing files changed, checks added, assumptions,
+  remaining manual integration steps, and what to do with ./harness-starter-kit
+  before committing.
 ```
 
 The longer version lives in
@@ -198,6 +225,19 @@ are not automatic project transformations. The installer copies profile files
 under `docs/harness/profiles/<profile>/` so an agent or maintainer can merge,
 adapt, or ignore the relevant snippets while preserving the target project's
 existing build system.
+
+The generic drift checks are baseline hygiene checks:
+
+- `scripts/check_docs_drift.py` catches broken local Markdown links and stale
+  file references in docs.
+- `scripts/check_structure.py` catches temporary and drift-prone filenames.
+
+Useful architecture drift checks must come from the target repository's actual
+rules. For example, if `AGENTS.md` says routes must not access the database
+directly, add a check for forbidden database imports in route files. If an ADR
+chooses Zustand instead of Redux, add a check that fails when Redux dependencies
+appear. If generated files must live under one directory, add a structure rule
+that rejects generated files elsewhere.
 
 If a repository starts with the generic harness and later introduces a concrete
 stack, run the
