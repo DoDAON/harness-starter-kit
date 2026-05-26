@@ -74,6 +74,10 @@ a {
   color: inherit;
 }
 
+section {
+  scroll-margin-top: calc(var(--topbar-height) + 20px);
+}
+
 button,
 a {
   font: inherit;
@@ -92,6 +96,17 @@ a {
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .crt-overlay {
@@ -136,6 +151,14 @@ a {
   text-decoration: none;
   text-shadow: 0 0 14px var(--shadow);
   white-space: nowrap;
+}
+
+.brand pre {
+  margin: 0;
+  color: var(--green);
+  font-size: 6px;
+  line-height: 0.96;
+  white-space: pre;
 }
 
 .language-switcher {
@@ -246,7 +269,6 @@ h3 {
 .hero-lede,
 .chapter p,
 .quick-copy p,
-.final-cta p,
 .component-item p {
   color: var(--green-soft);
   font-size: 18px;
@@ -261,6 +283,14 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .terminal-window {
@@ -400,6 +430,7 @@ pre {
 }
 
 .component-grid,
+.structure-view,
 .quick-start,
 .final-cta {
   width: min(100% - 40px, var(--content-max));
@@ -407,7 +438,11 @@ pre {
 }
 
 .component-grid {
-  padding: 90px 0 110px;
+  padding: 90px 0 80px;
+}
+
+.structure-view {
+  padding: 20px 0 110px;
 }
 
 .section-heading {
@@ -433,6 +468,39 @@ pre {
   display: inline-block;
   margin-bottom: 42px;
   color: var(--amber);
+}
+
+.structure-shell {
+  overflow: hidden;
+}
+
+.tree-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tree-column {
+  min-width: 0;
+  padding: 24px;
+}
+
+.tree-column + .tree-column {
+  border-left: 1px solid var(--line);
+}
+
+.tree-label {
+  margin-bottom: 14px;
+  color: var(--amber);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.tree-column pre {
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--green-soft);
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 .quick-start {
@@ -466,12 +534,6 @@ pre {
   min-height: 72vh;
   padding: 110px 0 130px;
   text-align: center;
-}
-
-.final-cta p {
-  max-width: 720px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .footer {
@@ -508,6 +570,7 @@ pre {
 @media (max-width: 980px) {
   .hero,
   .story,
+  .tree-columns,
   .quick-start {
     grid-template-columns: 1fr;
   }
@@ -542,6 +605,11 @@ pre {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .tree-column + .tree-column {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
 }
 
 @media (max-width: 640px) {
@@ -557,7 +625,13 @@ pre {
   }
 
   .brand {
-    white-space: normal;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .brand pre {
+    font-size: 4.8px;
   }
 
   .language-switcher {
@@ -573,6 +647,7 @@ pre {
   .hero,
   .story,
   .component-grid,
+  .structure-view,
   .quick-start,
   .final-cta {
     width: min(100% - 28px, var(--content-max));
@@ -598,7 +673,6 @@ pre {
   .hero-lede,
   .chapter p,
   .quick-copy p,
-  .final-cta p,
   .component-item p {
     font-size: 16px;
   }
@@ -609,9 +683,14 @@ pre {
 
   .boot-log,
   #terminal-output,
-  .command-panel pre {
+  .command-panel pre,
+  .tree-column pre {
     padding: 18px;
     font-size: 15px;
+  }
+
+  .tree-column {
+    padding: 0;
   }
 
   .boot-log {

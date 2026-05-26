@@ -9,7 +9,7 @@
   var terminalRunId = 0;
 
   var commandText =
-    "Read ../harness-starter-kit first. Apply the harness engineering starter kit to this repository. Preserve existing architecture, tools, and conventions. Add only the minimum missing harness files. Finish with a short adoption report.";
+    "Read ./harness-starter-kit first. Apply the harness engineering starter kit to this repository. Preserve existing architecture, tools, and conventions. Add only the minimum missing harness files. Finish with a short adoption report.";
 
   var copy = {
     en: {
@@ -51,7 +51,7 @@
           eyebrow: "05 / The command",
           title: "The quickest path is an agent prompt.",
           body:
-            "Download this kit next to the target repository, then ask your coding agent to read it and apply only the missing harness pieces."
+            "Download this kit inside the target repository, then ask your coding agent to read it and apply only the missing harness pieces."
         }
       },
       components: {
@@ -74,11 +74,19 @@
           body: "Decisions, failures, conventions, and domain language captured under docs/."
         }
       },
+      structure: {
+        eyebrow: "DIRECTORY TREE",
+        title: "See the harness before it lands.",
+        body:
+          "The starter kit sits inside the target repository while the agent reads it, then installs only the missing durable pieces into the target root.",
+        kitLabel: "Starter kit",
+        targetLabel: "Target repo after adoption"
+      },
       quick: {
         eyebrow: "QUICK START",
         title: "Ask an agent to apply the kit.",
         body:
-          "Clone or download harness-starter-kit next to a target repository. From the target repo, give your coding agent this prompt.",
+          "Clone or download harness-starter-kit inside a target repository. From the target repo, give your coding agent this prompt.",
         copy: "Copy agent prompt",
         copied: "Prompt copied.",
         selected: "Prompt selected. Press Ctrl+C to copy.",
@@ -86,58 +94,56 @@
       },
       final: {
         eyebrow: "END SESSION / KEEP THE CONTEXT",
-        title: "When the agent improves, the repo should improve too.",
-        body:
-          "Every repeated mistake can become a rule, a check, a record, or a feedback loop that survives the next session.",
-        cta: "Return to quick start"
+        cta: "Get started",
+        github: "View on GitHub"
       },
       footer: {
         tagline: "Durable context for coding agents."
       },
       terminal: {
         problem: {
-          command: "scan prompt-memory",
+          command: "explain problem",
           lines: [
-            "PROMPT BUFFER............. VOLATILE",
-            "SESSION CONTEXT........... LOCAL ONLY",
-            "REPO RULES................ NOT FOUND",
-            "RISK...................... SAME MISTAKE NEXT RUN"
+            "You tell an agent a rule in chat.",
+            "That rule helps only this session.",
+            "The next agent starts without that memory.",
+            "So repeated mistakes come back."
           ]
         },
         solution: {
-          command: "install repo-native-harness",
+          command: "explain harness",
           lines: [
-            "AGENTS.md................. RULE ENTRYPOINT",
-            "DOCS STORE................ DURABLE MEMORY",
-            "CHECKS.................... FAST FEEDBACK",
-            "RESULT.................... PROJECT-SCOPED CONTEXT"
+            "Put harness-starter-kit inside target-repo.",
+            "Ask the agent to read ./harness-starter-kit.",
+            "The agent inspects the project first.",
+            "Then it adds only the missing harness pieces."
           ]
         },
         components: {
-          command: "dir /w harness-components",
+          command: "explain files",
           lines: [
-            "[AGENTS.md] [docs/decisions] [docs/failures]",
-            "[docs/conventions] [docs/domain] [scripts/check_*]",
-            "MODE...................... CONSERVATIVE",
-            "OVERWRITE POLICY.......... SKIP EXISTING"
+            "AGENTS.md tells future agents the rules.",
+            "docs/ stores decisions, failures, and terms.",
+            "scripts/check_* catches stale docs or drift.",
+            "profiles/ gives optional Python and TS snippets."
           ]
         },
         adoption: {
-          command: "run adoption-workflow",
+          command: "explain adoption",
           lines: [
-            "1. INSPECT TARGET REPO",
-            "2. DETECT EXISTING TOOLS",
-            "3. ADD ONLY MISSING PIECES",
-            "4. WIRE CLOSEST VERIFICATION PATH"
+            "1. Read the target README, tools, and CI.",
+            "2. Keep the target repo as the source of truth.",
+            "3. Avoid overwriting existing files.",
+            "4. Finish with an adoption report."
           ]
         },
         quickStart: {
-          command: "type agent-prompt.txt",
+          command: "explain quick-start",
           lines: [
-            "1. CLONE OR DOWNLOAD HARNESS-STARTER-KIT",
-            "2. PLACE IT NEXT TO THE TARGET REPOSITORY",
-            "3. OPEN THE TARGET REPOSITORY WITH YOUR AGENT",
-            "4. ASK THE AGENT TO READ ../harness-starter-kit"
+            "Copy the agent prompt below.",
+            "Open target-repo with your coding agent.",
+            "Paste: Read ./harness-starter-kit first.",
+            "Review the report before merging changes."
           ]
         }
       }
@@ -181,7 +187,7 @@
           eyebrow: "05 / 명령",
           title: "가장 빠른 시작은 에이전트 프롬프트입니다.",
           body:
-            "이 키트를 대상 저장소 옆에 내려받고, 코딩 에이전트에게 읽은 뒤 누락된 harness 조각만 적용하라고 요청합니다."
+            "이 키트를 대상 저장소 안에 내려받고, 코딩 에이전트에게 읽은 뒤 누락된 harness 조각만 적용하라고 요청합니다."
         }
       },
       components: {
@@ -204,11 +210,19 @@
           body: "결정, 실패, 컨벤션, 도메인 언어를 docs/ 아래에 저장합니다."
         }
       },
+      structure: {
+        eyebrow: "DIRECTORY TREE",
+        title: "적용 전에 폴더 구조를 확인하세요.",
+        body:
+          "스타터 키트는 대상 저장소 안에 둡니다. 에이전트가 키트를 읽고, 대상 저장소 루트에는 누락된 durable 조각만 설치합니다.",
+        kitLabel: "스타터 키트",
+        targetLabel: "적용 후 대상 저장소"
+      },
       quick: {
         eyebrow: "빠른 시작",
         title: "에이전트에게 키트 적용을 요청합니다.",
         body:
-          "harness-starter-kit을 대상 저장소 옆에 클론하거나 다운로드하세요. 대상 저장소에서 코딩 에이전트에게 이 프롬프트를 주세요.",
+          "harness-starter-kit을 대상 저장소 안에 클론하거나 다운로드하세요. 대상 저장소에서 코딩 에이전트에게 이 프롬프트를 주세요.",
         copy: "에이전트 프롬프트 복사",
         copied: "프롬프트를 복사했습니다.",
         selected: "프롬프트를 선택했습니다. Ctrl+C로 복사하세요.",
@@ -216,58 +230,56 @@
       },
       final: {
         eyebrow: "END SESSION / KEEP THE CONTEXT",
-        title: "에이전트가 나아졌다면 저장소도 나아져야 합니다.",
-        body:
-          "반복되는 실수는 다음 세션까지 살아남는 규칙, 검사, 기록, 피드백 루프로 바뀔 수 있습니다.",
-        cta: "빠른 시작으로 돌아가기"
+        cta: "시작하기",
+        github: "GitHub로 이동"
       },
       footer: {
         tagline: "코딩 에이전트를 위한 durable context."
       },
       terminal: {
         problem: {
-          command: "scan prompt-memory",
+          command: "explain problem",
           lines: [
-            "PROMPT BUFFER............. VOLATILE",
-            "SESSION CONTEXT........... LOCAL ONLY",
-            "REPO RULES................ NOT FOUND",
-            "RISK...................... SAME MISTAKE NEXT RUN"
+            "채팅에서 에이전트에게 규칙을 알려줍니다.",
+            "그 규칙은 이번 세션에서만 도움이 됩니다.",
+            "다음 에이전트는 그 기억 없이 시작합니다.",
+            "그래서 같은 실수가 다시 돌아옵니다."
           ]
         },
         solution: {
-          command: "install repo-native-harness",
+          command: "explain harness",
           lines: [
-            "AGENTS.md................. RULE ENTRYPOINT",
-            "DOCS STORE................ DURABLE MEMORY",
-            "CHECKS.................... FAST FEEDBACK",
-            "RESULT.................... PROJECT-SCOPED CONTEXT"
+            "target-repo 안에 harness-starter-kit을 둡니다.",
+            "에이전트에게 ./harness-starter-kit을 읽게 합니다.",
+            "에이전트는 먼저 프로젝트를 살핍니다.",
+            "그 다음 누락된 harness 조각만 추가합니다."
           ]
         },
         components: {
-          command: "dir /w harness-components",
+          command: "explain files",
           lines: [
-            "[AGENTS.md] [docs/decisions] [docs/failures]",
-            "[docs/conventions] [docs/domain] [scripts/check_*]",
-            "MODE...................... CONSERVATIVE",
-            "OVERWRITE POLICY.......... SKIP EXISTING"
+            "AGENTS.md는 다음 에이전트에게 규칙을 알려줍니다.",
+            "docs/는 결정, 실패, 용어를 저장합니다.",
+            "scripts/check_*는 문서와 구조 drift를 잡습니다.",
+            "profiles/는 Python과 TS용 참고 스니펫입니다."
           ]
         },
         adoption: {
-          command: "run adoption-workflow",
+          command: "explain adoption",
           lines: [
-            "1. INSPECT TARGET REPO",
-            "2. DETECT EXISTING TOOLS",
-            "3. ADD ONLY MISSING PIECES",
-            "4. WIRE CLOSEST VERIFICATION PATH"
+            "1. 대상 README, 도구, CI를 먼저 읽습니다.",
+            "2. 대상 저장소를 기준으로 삼습니다.",
+            "3. 기존 파일은 함부로 덮어쓰지 않습니다.",
+            "4. 마지막에 적용 보고서를 남깁니다."
           ]
         },
         quickStart: {
-          command: "type agent-prompt.txt",
+          command: "explain quick-start",
           lines: [
-            "1. CLONE OR DOWNLOAD HARNESS-STARTER-KIT",
-            "2. PLACE IT NEXT TO THE TARGET REPOSITORY",
-            "3. OPEN THE TARGET REPOSITORY WITH YOUR AGENT",
-            "4. ASK THE AGENT TO READ ../harness-starter-kit"
+            "아래 에이전트 프롬프트를 복사합니다.",
+            "target-repo를 코딩 에이전트로 엽니다.",
+            "붙여넣기: ./harness-starter-kit을 먼저 읽어줘.",
+            "merge 전 적용 보고서를 확인합니다."
           ]
         }
       }
@@ -311,7 +323,7 @@
           eyebrow: "05 / コマンド",
           title: "最短の開始方法はエージェントプロンプトです。",
           body:
-            "このキットを対象リポジトリの隣に置き、コーディングエージェントに読ませて不足している harness だけを適用させます。"
+            "このキットを対象リポジトリの中に置き、コーディングエージェントに読ませて不足している harness だけを適用させます。"
         }
       },
       components: {
@@ -334,11 +346,19 @@
           body: "decision、failure、convention、domain language を docs/ 配下に保存します。"
         }
       },
+      structure: {
+        eyebrow: "DIRECTORY TREE",
+        title: "導入前にフォルダ構成を確認できます。",
+        body:
+          "スターターキットは対象リポジトリの中に置きます。エージェントがそれを読み、対象リポジトリのルートには不足している durable な要素だけを導入します。",
+        kitLabel: "スターターキット",
+        targetLabel: "導入後の対象リポジトリ"
+      },
       quick: {
         eyebrow: "クイックスタート",
         title: "エージェントにキットの適用を依頼します。",
         body:
-          "harness-starter-kit を対象リポジトリの隣にクローンまたはダウンロードします。対象リポジトリで、このプロンプトをコーディングエージェントに渡してください。",
+          "harness-starter-kit を対象リポジトリの中にクローンまたはダウンロードします。対象リポジトリで、このプロンプトをコーディングエージェントに渡してください。",
         copy: "エージェントプロンプトをコピー",
         copied: "プロンプトをコピーしました。",
         selected: "プロンプトを選択しました。Ctrl+C でコピーしてください。",
@@ -346,58 +366,56 @@
       },
       final: {
         eyebrow: "END SESSION / KEEP THE CONTEXT",
-        title: "エージェントが改善したなら、リポジトリも改善されるべきです。",
-        body:
-          "繰り返す失敗は、次のセッションまで残るルール、チェック、記録、フィードバックループに変えられます。",
-        cta: "クイックスタートに戻る"
+        cta: "はじめる",
+        github: "GitHub を見る"
       },
       footer: {
         tagline: "コーディングエージェントのための durable context."
       },
       terminal: {
         problem: {
-          command: "scan prompt-memory",
+          command: "explain problem",
           lines: [
-            "PROMPT BUFFER............. VOLATILE",
-            "SESSION CONTEXT........... LOCAL ONLY",
-            "REPO RULES................ NOT FOUND",
-            "RISK...................... SAME MISTAKE NEXT RUN"
+            "チャットでエージェントにルールを伝えます。",
+            "そのルールは今回のセッションだけを助けます。",
+            "次のエージェントはその記憶なしで始まります。",
+            "そのため同じミスが戻ってきます。"
           ]
         },
         solution: {
-          command: "install repo-native-harness",
+          command: "explain harness",
           lines: [
-            "AGENTS.md................. RULE ENTRYPOINT",
-            "DOCS STORE................ DURABLE MEMORY",
-            "CHECKS.................... FAST FEEDBACK",
-            "RESULT.................... PROJECT-SCOPED CONTEXT"
+            "target-repo の中に harness-starter-kit を置きます。",
+            "エージェントに ./harness-starter-kit を読ませます。",
+            "エージェントはまずプロジェクトを調べます。",
+            "その後、不足している harness だけを追加します。"
           ]
         },
         components: {
-          command: "dir /w harness-components",
+          command: "explain files",
           lines: [
-            "[AGENTS.md] [docs/decisions] [docs/failures]",
-            "[docs/conventions] [docs/domain] [scripts/check_*]",
-            "MODE...................... CONSERVATIVE",
-            "OVERWRITE POLICY.......... SKIP EXISTING"
+            "AGENTS.md は次のエージェントへルールを伝えます。",
+            "docs/ は decision、failure、用語を保存します。",
+            "scripts/check_* は文書や構造の drift を検出します。",
+            "profiles/ は Python と TS の参考スニペットです。"
           ]
         },
         adoption: {
-          command: "run adoption-workflow",
+          command: "explain adoption",
           lines: [
-            "1. INSPECT TARGET REPO",
-            "2. DETECT EXISTING TOOLS",
-            "3. ADD ONLY MISSING PIECES",
-            "4. WIRE CLOSEST VERIFICATION PATH"
+            "1. 対象 README、ツール、CI を先に読みます。",
+            "2. 対象リポジトリを正とします。",
+            "3. 既存ファイルを勝手に上書きしません。",
+            "4. 最後に導入レポートを残します。"
           ]
         },
         quickStart: {
-          command: "type agent-prompt.txt",
+          command: "explain quick-start",
           lines: [
-            "1. CLONE OR DOWNLOAD HARNESS-STARTER-KIT",
-            "2. PLACE IT NEXT TO THE TARGET REPOSITORY",
-            "3. OPEN THE TARGET REPOSITORY WITH YOUR AGENT",
-            "4. ASK THE AGENT TO READ ../harness-starter-kit"
+            "下のエージェントプロンプトをコピーします。",
+            "target-repo をコーディングエージェントで開きます。",
+            "貼り付け: まず ./harness-starter-kit を読んでください。",
+            "merge 前に導入レポートを確認します。"
           ]
         }
       }
@@ -441,7 +459,7 @@
           eyebrow: "05 / 命令",
           title: "最快的开始方式是代理提示词。",
           body:
-            "把这个套件放到目标仓库旁边，然后让代码代理阅读它并只应用缺失的 harness 部分。"
+            "把这个套件放到目标仓库内部，然后让代码代理阅读它并只应用缺失的 harness 部分。"
         }
       },
       components: {
@@ -464,11 +482,19 @@
           body: "把 decision、failure、convention 和 domain language 保存到 docs/ 下。"
         }
       },
+      structure: {
+        eyebrow: "DIRECTORY TREE",
+        title: "在采用之前先看清目录结构。",
+        body:
+          "starter kit 放在目标仓库内部。代理先读取它，然后只把缺失的 durable 部分安装到目标仓库根目录中。",
+        kitLabel: "starter kit",
+        targetLabel: "采用后的目标仓库"
+      },
       quick: {
         eyebrow: "快速开始",
         title: "让代理应用这个套件。",
         body:
-          "把 harness-starter-kit 克隆或下载到目标仓库旁边。然后在目标仓库中，把这个提示词交给代码代理。",
+          "把 harness-starter-kit 克隆或下载到目标仓库内部。然后在目标仓库中，把这个提示词交给代码代理。",
         copy: "复制代理提示词",
         copied: "提示词已复制。",
         selected: "提示词已选中。请按 Ctrl+C 复制。",
@@ -476,58 +502,56 @@
       },
       final: {
         eyebrow: "END SESSION / KEEP THE CONTEXT",
-        title: "如果代理变得更好，仓库也应该变得更好。",
-        body:
-          "每一个重复错误，都可以变成能延续到下个会话的规则、检查、记录或反馈回路。",
-        cta: "返回快速开始"
+        cta: "开始使用",
+        github: "查看 GitHub"
       },
       footer: {
         tagline: "面向代码代理的 durable context。"
       },
       terminal: {
         problem: {
-          command: "scan prompt-memory",
+          command: "explain problem",
           lines: [
-            "PROMPT BUFFER............. VOLATILE",
-            "SESSION CONTEXT........... LOCAL ONLY",
-            "REPO RULES................ NOT FOUND",
-            "RISK...................... SAME MISTAKE NEXT RUN"
+            "你在聊天中告诉代理一条规则。",
+            "这条规则只帮助当前会话。",
+            "下一个代理不会自动记住它。",
+            "所以同样的错误可能再次出现。"
           ]
         },
         solution: {
-          command: "install repo-native-harness",
+          command: "explain harness",
           lines: [
-            "AGENTS.md................. RULE ENTRYPOINT",
-            "DOCS STORE................ DURABLE MEMORY",
-            "CHECKS.................... FAST FEEDBACK",
-            "RESULT.................... PROJECT-SCOPED CONTEXT"
+            "把 harness-starter-kit 放进 target-repo。",
+            "让代理先读取 ./harness-starter-kit。",
+            "代理会先检查现有项目。",
+            "然后只添加缺失的 harness 部分。"
           ]
         },
         components: {
-          command: "dir /w harness-components",
+          command: "explain files",
           lines: [
-            "[AGENTS.md] [docs/decisions] [docs/failures]",
-            "[docs/conventions] [docs/domain] [scripts/check_*]",
-            "MODE...................... CONSERVATIVE",
-            "OVERWRITE POLICY.......... SKIP EXISTING"
+            "AGENTS.md 把规则告诉之后的代理。",
+            "docs/ 保存决策、失败记录和术语。",
+            "scripts/check_* 检测文档和结构 drift。",
+            "profiles/ 提供 Python 和 TS 参考片段。"
           ]
         },
         adoption: {
-          command: "run adoption-workflow",
+          command: "explain adoption",
           lines: [
-            "1. INSPECT TARGET REPO",
-            "2. DETECT EXISTING TOOLS",
-            "3. ADD ONLY MISSING PIECES",
-            "4. WIRE CLOSEST VERIFICATION PATH"
+            "1. 先阅读目标 README、工具和 CI。",
+            "2. 以目标仓库为事实来源。",
+            "3. 不随意覆盖已有文件。",
+            "4. 最后留下采用报告。"
           ]
         },
         quickStart: {
-          command: "type agent-prompt.txt",
+          command: "explain quick-start",
           lines: [
-            "1. CLONE OR DOWNLOAD HARNESS-STARTER-KIT",
-            "2. PLACE IT NEXT TO THE TARGET REPOSITORY",
-            "3. OPEN THE TARGET REPOSITORY WITH YOUR AGENT",
-            "4. ASK THE AGENT TO READ ../harness-starter-kit"
+            "复制下面的代理提示词。",
+            "用你的代码代理打开 target-repo。",
+            "粘贴: 先阅读 ./harness-starter-kit。",
+            "合并前检查采用报告。"
           ]
         }
       }

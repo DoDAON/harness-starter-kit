@@ -17,7 +17,17 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="harness-starter-kit home">
-        <span>HARNESS STARTER KIT</span>
+        <pre aria-hidden="true"> _   _    _    ____  _   _ _____ ____ ____
+| | | |  / \  |  _ \| \ | | ____/ ___/ ___|
+| |_| | / _ \ | |_) |  \| |  _| \___ \___ \
+|  _  |/ ___ \|  _ <| |\  | |___ ___) |__) |
+|_| |_/_/   \_\_| \_\_| \_|_____|____/____/
+ ____ _____  _    ____ _____ _____ ____    _  _____ _____
+/ ___|_   _|/ \  |  _ \_   _| ____|  _ \  | |/ /_ _|_   _|
+\___ \ | | / _ \ | |_) || | |  _| | |_) | | ' / | |  | |
+ ___) || |/ ___ \|  _ < | | | |___|  _ <  | . \ | |  | |
+|____/ |_/_/   \_\_| \_\|_| |_____|_| \_\ |_|\_\___| |_|</pre>
+        <span class="sr-only">HARNESS STARTER KIT</span>
       </a>
       <nav class="language-switcher" aria-label="Language">
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -129,6 +139,58 @@ C:\HKS&gt; <span id="hero-command"></span><span class="cursor">_</span></code></
         </div>
       </section>
 
+      <section class="structure-view" id="structure" aria-labelledby="structure-title">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="structure.eyebrow"></p>
+          <h2 id="structure-title" data-i18n="structure.title"></h2>
+          <p data-i18n="structure.body"></p>
+        </div>
+        <div class="structure-shell terminal-window">
+          <div class="window-bar">
+            <span>TREE.EXE</span>
+            <span class="window-controls">/A /F</span>
+          </div>
+          <div class="tree-columns">
+            <div class="tree-column">
+              <p class="tree-label" data-i18n="structure.kitLabel"></p>
+              <pre aria-label="harness-starter-kit folder tree"><code>C:\workspace\target-repo
+|-- harness-starter-kit
+|   |-- AGENTS.md
+|   |-- README.md
+|   |-- docs
+|   |   |-- decisions
+|   |   |-- failures
+|   |   |-- conventions
+|   |   `-- domain
+|   |-- scripts
+|   |   |-- apply_harness.py
+|   |   |-- check_docs_drift.py
+|   |   `-- check_structure.py
+|   `-- templates
+`-- existing-project-files</code></pre>
+            </div>
+            <div class="tree-column">
+              <p class="tree-label" data-i18n="structure.targetLabel"></p>
+              <pre aria-label="target repository folder tree after adoption"><code>C:\workspace\target-repo
+|-- AGENTS.md
+|-- docs
+|   |-- decisions
+|   |-- failures
+|   |-- conventions
+|   |-- domain
+|   `-- harness
+|       `-- profiles
+|-- harness-starter-kit
+|   `-- starter-kit-source
+|-- scripts
+|   |-- check_docs_drift.py
+|   `-- check_structure.py
+`-- existing-project-files</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="quick-start" id="quick-start" aria-labelledby="quick-title">
         <div class="quick-copy">
           <p class="eyebrow" data-i18n="quick.eyebrow"></p>
@@ -140,17 +202,24 @@ C:\HKS&gt; <span id="hero-command"></span><span class="cursor">_</span></code></
             <span>QUICKSTART.BAT</span>
             <span class="window-controls">COPY READY</span>
           </div>
-          <pre><code id="quick-command">Read ../harness-starter-kit first. Apply the harness engineering starter kit to this repository. Preserve existing architecture, tools, and conventions. Add only the minimum missing harness files. Finish with a short adoption report.</code></pre>
+          <pre><code id="quick-command">Read ./harness-starter-kit first. Apply the harness engineering starter kit to this repository. Preserve existing architecture, tools, and conventions. Add only the minimum missing harness files. Finish with a short adoption report.</code></pre>
           <button type="button" class="copy-button" data-i18n="quick.copy"></button>
           <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
         </div>
       </section>
 
-      <section class="final-cta" aria-labelledby="final-title">
+      <section class="final-cta" aria-label="Final actions">
         <p class="eyebrow" data-i18n="final.eyebrow"></p>
-        <h2 id="final-title" data-i18n="final.title"></h2>
-        <p data-i18n="final.body"></p>
-        <a class="button button-primary" href="#quick-start" data-i18n="final.cta"></a>
+        <div class="final-actions">
+          <a class="button button-primary" href="#quick-start" data-i18n="final.cta"></a>
+          <a
+            class="button button-secondary"
+            href="https://github.com/baskduf/harness-starter-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="final.github"
+          ></a>
+        </div>
       </section>
     </main>
 
