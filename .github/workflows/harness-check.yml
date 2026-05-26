@@ -3,6 +3,12 @@ name: Harness Check
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      run_fastapi_e2e:
+        description: "Run dependency-installing FastAPI profile E2E test"
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: "0 0 * * 1"
 
@@ -16,9 +22,27 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Run unit tests
+        run: python -m unittest discover -s tests
+
+      - name: Compile Python scripts
+        run: python -m py_compile scripts/apply_harness.py scripts/check_docs_drift.py scripts/check_structure.py
+
       - name: Check document drift
         run: python scripts/check_docs_drift.py
 
       - name: Check structure drift
         run: python scripts/check_structure.py
 
+  fastapi-e2e:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_fastapi_e2e }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run FastAPI profile E2E
+        run: RUN_FASTAPI_E2E=1 python -m unittest tests.test_fastapi_profile_e2e
