@@ -106,6 +106,27 @@ class CheckDocsDriftTests(unittest.TestCase):
             self.assertEqual("", result.stdout)
             self.assertEqual(0, result.returncode)
 
+    def test_placeholder_globs_and_ellipsis_are_not_treated_as_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text(
+                "\n".join(
+                    [
+                        "# Sample",
+                        "`docs/failures/...`",
+                        "`docs/failures/*.md`",
+                        "`docs/templates/<name>.md`",
+                        "`{{PROJECT_NAME}}/docs`",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = self.run_checker(root)
+
+            self.assertEqual("", result.stdout)
+            self.assertEqual(0, result.returncode)
+
 
 if __name__ == "__main__":
     unittest.main()

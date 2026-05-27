@@ -65,11 +65,39 @@ class HarnessDoctorTests(unittest.TestCase):
                 encoding="utf-8",
             )
             (target / "docs" / "decisions" / "001-real.md").write_text(
-                "# Use the existing service layer\n",
+                "\n".join(
+                    [
+                        "# Use the existing service layer",
+                        "",
+                        "## Context",
+                        "",
+                        "Routes need a stable boundary.",
+                        "",
+                        "## Decision",
+                        "",
+                        "Keep business behavior in the service layer.",
+                    ]
+                ),
                 encoding="utf-8",
             )
             (target / "docs" / "failures" / "001-real.md").write_text(
-                "# Repeated migration mistake\n",
+                "\n".join(
+                    [
+                        "# Repeated migration mistake",
+                        "",
+                        "## Why It Failed",
+                        "",
+                        "Agents edited generated migrations directly.",
+                        "",
+                        "## Current Replacement",
+                        "",
+                        "Regenerate migrations from model changes.",
+                        "",
+                        "## Agent Guidance",
+                        "",
+                        "Do not rewrite committed migrations without approval.",
+                    ]
+                ),
                 encoding="utf-8",
             )
             (target / "docs" / "conventions" / "coding.md").write_text(
@@ -98,6 +126,42 @@ class HarnessDoctorTests(unittest.TestCase):
             self.assertIn("Agent Instructions: 20/20", result.stdout)
             self.assertIn("Durable Memory: 20/20", result.stdout)
             self.assertIn("Structural Safety:", result.stdout)
+
+    def test_title_only_records_do_not_count_as_real_memory(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp)
+            (target / "docs" / "decisions").mkdir(parents=True)
+            (target / "docs" / "failures").mkdir(parents=True)
+            (target / "docs" / "conventions").mkdir(parents=True)
+            (target / "docs" / "domain").mkdir(parents=True)
+            (target / "README.md").write_text(
+                "# Example\n\n## Quick Start\n\nRun `python -m unittest`.\n",
+                encoding="utf-8",
+            )
+            (target / "docs" / "decisions" / "001-thin.md").write_text(
+                "# Use services\n",
+                encoding="utf-8",
+            )
+            (target / "docs" / "failures" / "001-thin.md").write_text(
+                "# Migration mistake\n",
+                encoding="utf-8",
+            )
+            (target / "docs" / "conventions" / "coding.md").write_text(
+                "# Coding conventions\n",
+                encoding="utf-8",
+            )
+            (target / "docs" / "domain" / "glossary.md").write_text(
+                "# Glossary\n",
+                encoding="utf-8",
+            )
+
+            result = self.run_doctor(target)
+
+            self.assertIn("Durable Memory: 17/20", result.stdout)
+            self.assertIn(
+                "Durable Memory: At least one real decision or failure record exists",
+                result.stdout,
+            )
 
     def test_failure_readme_does_not_count_as_real_failure_record(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

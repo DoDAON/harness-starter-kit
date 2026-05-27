@@ -49,6 +49,17 @@ AGENT_INSTRUCTION_PATHS = (
     ".github/copilot-instructions.md",
 )
 
+DECISION_RECORD_SECTIONS = (
+    "## Context",
+    "## Decision",
+)
+
+FAILURE_RECORD_SECTIONS = (
+    "## Why It Failed",
+    "## Current Replacement",
+    "## Agent Guidance",
+)
+
 
 @dataclass(frozen=True)
 class Check:
@@ -193,6 +204,16 @@ def is_placeholder_record(path: Path, text: str) -> bool:
     )
 
 
+def has_required_record_sections(path: Path, text: str) -> bool:
+    normalized = text.lower()
+    path_parts = {part.lower() for part in path.parts}
+    if "failures" in path_parts:
+        return all(section.lower() in normalized for section in FAILURE_RECORD_SECTIONS)
+    if "decisions" in path_parts:
+        return all(section.lower() in normalized for section in DECISION_RECORD_SECTIONS)
+    return len(text.strip()) >= 80
+
+
 def non_template_records(root: Path, relatives: tuple[str, ...]) -> list[Path]:
     records: list[Path] = []
     for relative in relatives:
@@ -202,6 +223,8 @@ def non_template_records(root: Path, relatives: tuple[str, ...]) -> list[Path]:
         for path in sorted(directory.rglob("*.md")):
             text = read_text(path)
             if is_placeholder_record(path, text):
+                continue
+            if not has_required_record_sections(path, text):
                 continue
             records.append(path)
     return records
