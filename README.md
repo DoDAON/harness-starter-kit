@@ -1,21 +1,7 @@
-<pre align="center">
- _   _    _    ____  _   _ _____ ____ ____
-| | | |  / \  |  _ \| \ | | ____/ ___/ ___|
-| |_| | / _ \ | |_) |  \| |  _| \___ \___ \
-|  _  |/ ___ \|  _ <| |\  | |___ ___) |__) |
-|_| |_/_/   \_\_| \_\_| \_|_____|____/____/
 
- ____ _____  _    ____ _____ _____ ____    _  _____ _____
-/ ___|_   _|/ \  |  _ \_   _| ____|  _ \  | |/ /_ _|_   _|
-\___ \ | | / _ \ | |_) || | |  _| | |_) | | ' / | |  | |
- ___) || |/ ___ \|  _ < | | | |___|  _ <  | . \ | |  | |
-|____/ |_/_/   \_\_| \_\|_| |_____|_| \_\ |_|\_\___| |_|
-</pre>
 
 <img width="1672" height="358" alt="harness-starter-kit-logo" src="https://github.com/user-attachments/assets/114feea7-6d8c-4006-9262-d5cc4ad7e604" />
 
-
-# harness-starter-kit
 
 <p align="center">
   <img alt="Generic profile" src="https://img.shields.io/badge/profile-generic-6b7280?style=flat-square" />
