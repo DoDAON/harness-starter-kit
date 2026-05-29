@@ -14,6 +14,7 @@
   <img alt="Flask" src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white" />
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" />
+  <img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" />
 </p>
 
 **English** | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
@@ -126,7 +127,7 @@ cloned kit under `harness-starter-kit/templates/profiles/<profile>`.
 ## Profiles
 
 Available profiles are `generic`, `python`, `typescript`, `nextjs`, `django`,
-`flask`, `fastapi`, `spring`, `react`, and `vue`.
+`flask`, `fastapi`, `spring`, `android`, `react`, and `vue`.
 
 Profiles are conservative reference material, not automatic transformations.
 Adopt only the snippets that fit the target repository's current tools and
@@ -146,9 +147,10 @@ use [`docs/checklists/profile-absorption.md`](docs/checklists/profile-absorption
 ## Validation And Measurement
 
 Automated fixture tests cover installation and runnable drift checks across
-Node.js, Next.js, Django, FastAPI, Flask, React, Spring Boot, Vue, Python, and
-TypeScript-oriented profiles. See [`docs/validation.md`](docs/validation.md) for
-coverage details and opt-in E2E checks.
+Node.js, Next.js, Django, FastAPI, Flask, React, Spring Boot, Android, Vue,
+Python, and TypeScript-oriented profiles. See
+[`docs/validation.md`](docs/validation.md) for coverage details and opt-in E2E
+checks.
 
 A live dogfooding target is
 [baskduf/harness_starter_kit_django](https://github.com/baskduf/harness_starter_kit_django),

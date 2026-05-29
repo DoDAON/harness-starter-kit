@@ -39,6 +39,7 @@ class FixtureSmokeTests(unittest.TestCase):
             ),
         ),
         "spring-basic": ("spring", ("check_harness.py", "gitignore.harness.txt")),
+        "android-basic": ("android", ("check_harness.py", "gitignore.harness.txt")),
         "vue-basic": (
             "vue",
             (

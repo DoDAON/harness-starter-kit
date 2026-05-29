@@ -18,6 +18,7 @@
   <img alt="Flask" src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white" />
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" />
+  <img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" />
 </p>
 
 <p align="center">
@@ -126,7 +127,7 @@ adoption 중에는 cloned kit의 `harness-starter-kit/templates/profiles/<profil
 ## Profiles
 
 사용 가능한 profile은 `generic`, `python`, `typescript`, `nextjs`, `django`,
-`flask`, `fastapi`, `spring`, `react`, `vue`입니다.
+`flask`, `fastapi`, `spring`, `android`, `react`, `vue`입니다.
 
 Profile은 보수적인 참고 자료이며 자동 변환 규칙이 아닙니다. 대상 저장소의 현재
 도구와 유지보수 기대에 맞는 snippet만 채택하세요. Stack이 나중에 도입되면
@@ -146,8 +147,8 @@ Profile은 보수적인 참고 자료이며 자동 변환 규칙이 아닙니다
 ## 검증과 측정
 
 자동 fixture test는 Node.js, Next.js, Django, FastAPI, Flask, React, Spring
-Boot, Vue, Python, TypeScript 중심 profile의 설치와 drift check 실행 가능성을
-검증합니다. 자세한 coverage와 opt-in E2E checks는
+Boot, Android, Vue, Python, TypeScript 중심 profile의 설치와 drift check 실행
+가능성을 검증합니다. 자세한 coverage와 opt-in E2E checks는
 [`docs/validation.md`](docs/validation.md)를 보세요.
 
 실제 dogfooding 대상은

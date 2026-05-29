@@ -1,0 +1,15 @@
+.gradle/
+build/
+**/build/
+.cxx/
+captures/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.iml
+.idea/
+.kotlin/
+harness-starter-kit/

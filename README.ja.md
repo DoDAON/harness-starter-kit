@@ -18,6 +18,7 @@
   <img alt="Flask" src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white" />
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" />
+  <img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" />
 </p>
 
 <p align="center">
@@ -127,7 +128,7 @@ Prompt-first adoption では cloned kit の
 ## Profiles
 
 利用できる profile は `generic`, `python`, `typescript`, `nextjs`, `django`,
-`flask`, `fastapi`, `spring`, `react`, `vue` です。
+`flask`, `fastapi`, `spring`, `android`, `react`, `vue` です。
 
 Profile は保守的な参考資料であり、自動変換ルールではありません。対象
 リポジトリの現在の tools と maintenance expectations に合う snippet だけを
@@ -148,8 +149,8 @@ Profile は保守的な参考資料であり、自動変換ルールではあり
 ## 検証と測定
 
 自動 fixture tests は、Node.js、Next.js、Django、FastAPI、Flask、React、
-Spring Boot、Vue、Python、TypeScript 系 profile の installation と runnable
-drift checks を検証します。Coverage details と opt-in E2E checks は
+Spring Boot、Android、Vue、Python、TypeScript 系 profile の installation と
+runnable drift checks を検証します。Coverage details と opt-in E2E checks は
 [`docs/validation.md`](docs/validation.md) を参照してください。
 
 実際の dogfooding target は

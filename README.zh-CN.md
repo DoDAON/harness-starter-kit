@@ -18,6 +18,7 @@
   <img alt="Flask" src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white" />
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" />
+  <img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" />
 </p>
 
 <p align="center">
@@ -125,7 +126,7 @@ cloned kit 中的 `harness-starter-kit/templates/profiles/<profile>`。
 ## Profiles
 
 可用 profile 包括 `generic`, `python`, `typescript`, `nextjs`, `django`,
-`flask`, `fastapi`, `spring`, `react`, `vue`。
+`flask`, `fastapi`, `spring`, `android`, `react`, `vue`。
 
 Profile 是保守参考资料，不是自动转换规则。只采用符合目标仓库当前工具和维护预期
 的 snippet。若之后引入 stack，请使用
@@ -144,8 +145,8 @@ Profile 是保守参考资料，不是自动转换规则。只采用符合目标
 ## 验证与测量
 
 自动 fixture tests 覆盖 Node.js、Next.js、Django、FastAPI、Flask、React、
-Spring Boot、Vue、Python、TypeScript 相关 profile 的安装行为和 runnable drift
-checks。Coverage details 和 opt-in E2E checks 见
+Spring Boot、Android、Vue、Python、TypeScript 相关 profile 的安装行为和
+runnable drift checks。Coverage details 和 opt-in E2E checks 见
 [`docs/validation.md`](docs/validation.md)。
 
 实际 dogfooding target 是

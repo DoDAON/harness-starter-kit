@@ -30,6 +30,7 @@ Automated fixture smoke tests cover harness installation for:
 - Flask
 - React
 - Spring Boot
+- Android / Kotlin Gradle
 - Vue
 
 These tests verify that the installer preserves existing files, writes expected

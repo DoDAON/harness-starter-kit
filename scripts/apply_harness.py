@@ -67,6 +67,7 @@ def parse_args() -> argparse.Namespace:
             "django",
             "flask",
             "spring",
+            "android",
             "fastapi",
             "react",
             "vue",
