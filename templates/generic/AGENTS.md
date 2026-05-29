@@ -18,6 +18,25 @@ Document the commands agents should run before finishing work.
 # example: npm run lint
 ```
 
+## Project Analysis Rule
+
+When asked to analyze, review, summarize, onboard to, or explain this project,
+inspect these first when they exist:
+
+- README or equivalent project overview
+- `AGENTS.md`
+- `.harness/source.json`
+- `docs/decisions/`
+- `docs/conventions/`
+- `docs/domain/`
+- `docs/failures/`
+- `scripts/check_harness.py`
+- `scripts/check_*.py`
+
+Then summarize the project in terms of structure, current behavior, tests,
+documentation, known decisions, known failures, drift checks, and recommended
+next work.
+
 ## Directory Rules
 
 Document the important source boundaries.

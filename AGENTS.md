@@ -68,6 +68,25 @@ When changing profile README files, also keep
 `docs/templates/profile-readme.md`, `docs/checklists/profile-maintenance.md`,
 and `tests/test_profile_consistency.py` aligned.
 
+## Project Analysis Rule
+
+When asked to analyze, review, summarize, onboard to, or explain this project,
+inspect these first when they exist:
+
+- `README.md`
+- `AGENTS.md`
+- `.harness/source.json`
+- `docs/decisions/`
+- `docs/conventions/`
+- `docs/domain/`
+- `docs/failures/`
+- `scripts/check_harness.py`
+- `scripts/check_*.py`
+
+Then summarize the project in terms of structure, current behavior, tests,
+documentation, known decisions, known failures, drift checks, and recommended
+next work.
+
 ## How To Apply This Kit To A Target Repository
 
 1. Inspect the target repository before editing.

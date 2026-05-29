@@ -72,6 +72,7 @@ class CheckDocsDriftTests(unittest.TestCase):
                         "`.gradle/`",
                         "`.vite/`",
                         "`tsconfig.tsbuildinfo`",
+                        "`scripts/check_harness.py`",
                         "[Local clone](harness-starter-kit/)",
                     ]
                 ),

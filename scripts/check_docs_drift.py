@@ -51,6 +51,7 @@ OPTIONAL_REFERENCES = {
     "target",
     "target/",
     "target-repo/harness-starter-kit",
+    "scripts/check_harness.py",
     "tsconfig.tsbuildinfo",
     "venv",
     "venv/",
