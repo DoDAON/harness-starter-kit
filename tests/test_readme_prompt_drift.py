@@ -6,6 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+SITE_APP = REPO_ROOT / "site" / "app.js"
 LOCALIZED_READMES = (
     "README.ko.md",
     "README.ja.md",
@@ -26,6 +27,14 @@ def agent_prompt_blocks(readme: Path) -> list[str]:
         for block in blocks
         if any(marker in block for marker in PROMPT_MARKERS)
     ]
+
+
+def site_adoption_prompt() -> str:
+    text = SITE_APP.read_text(encoding="utf-8")
+    match = re.search(r"const adoptionPrompt = `(.*?)`;", text, flags=re.DOTALL)
+    if match is None:
+        raise AssertionError("site/app.js adoptionPrompt template literal not found")
+    return match.group(1)
 
 
 class ReadmePromptDriftTests(unittest.TestCase):
@@ -51,6 +60,11 @@ class ReadmePromptDriftTests(unittest.TestCase):
                 actual = agent_prompt_blocks(REPO_ROOT / filename)
                 self.assertGreaterEqual(len(actual), 1)
                 self.assertEqual(expected, actual[0])
+
+    def test_site_copy_prompt_matches_readme_prompt(self) -> None:
+        expected_blocks = agent_prompt_blocks(REPO_ROOT / "README.md")
+        self.assertGreaterEqual(len(expected_blocks), 1)
+        self.assertEqual(expected_blocks[0], site_adoption_prompt())
 
 
 if __name__ == "__main__":
