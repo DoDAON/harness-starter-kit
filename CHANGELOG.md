@@ -2,6 +2,31 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## v0.1.3 - 2026-05-31
+
+Patch release for `/harness review` reviewer-mode routing. This release keeps
+the command diagnostic-only while making subagent availability and fallback
+reporting harder to skip silently.
+
+### Added
+
+- Explicit `/harness review sub-agent` invocation mode that treats the request
+  as permission to call a read-only reviewer subagent when the active runtime
+  and tool instructions allow it.
+- Review report `Invocation`, `Reviewer mode`, and `Fallback reason` fields in
+  the template and example report.
+- Regression coverage for subagent fallback guidance, prompt drift, localized
+  README wiring, and route precedence between `/harness review sub-agent` and
+  `/harness review`.
+
+### Changed
+
+- Clarify `/harness review` fallback behavior when a subagent tool is present
+  but not permitted by active tool instructions.
+- Route the more specific `/harness review sub-agent` command before the
+  generic `/harness review` command in agent-facing prompts and command
+  routing.
+
 ## v0.1.2 - 2026-05-31
 
 Governance release for change-set review. This release adds a diagnostic
