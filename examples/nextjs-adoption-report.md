@@ -33,6 +33,17 @@ The command ran these named axes:
 
 All checks passed.
 
+## Verification Gate Placement
+
+- Normal completion gate: `npm.cmd run check:harness`.
+- Deterministic behavior checks included in the normal gate: none added; this
+  adoption configured typecheck, build, docs drift, and structure drift for a
+  generated sample app without new product behavior.
+- Focused or manual checks outside the normal gate: `npm audit --audit-level=high`
+  was run as a one-time dependency advisory check.
+- Reasons for focused/manual placement: audit output can change with registry
+  advisories and does not prove local product behavior for every completion.
+
 ## External API Verification
 
 - Required: No. The sample app does not call an external API.

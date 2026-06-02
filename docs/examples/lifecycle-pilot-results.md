@@ -81,7 +81,10 @@ Limitations:
 After adding the practical verification checklists, a `today-bus` Next.js
 target was used as an external API dogfood case. The target exercised TAGO and
 Gumi BIS public-data paths, server-only secret handling, deterministic planner
-fallbacks, and live smoke scripts kept outside the default `check:harness` gate.
+fallbacks, and live smoke scripts. Later review separated deterministic planner
+tests, which are normal-gate placement candidates, from live smoke scripts that
+can remain focused because they depend on credentials, network state, quota, and
+provider uptime.
 
 Successful behaviors:
 
@@ -89,11 +92,11 @@ Successful behaviors:
 - treated current TAGO arrival zero-result responses as a deliberate empty live
   state instead of a crash or mock success
 - verified deterministic `tago`, `gumi_bis_timetable`, and `mock` fallback
-  planner paths
+  planner paths, then identified those checks as normal-gate placement
+  candidates rather than ordinary live-smoke checks
 - kept live smoke commands separate from `check:harness` because provider
   credentials, network state, and public-data availability vary
-- used focused checks such as `npm run test:planner`,
-  `node scripts/check-tago-backend.mjs`, and
+- used focused live checks such as `node scripts/check-tago-backend.mjs` and
   `node scripts/check-gumi-bis-offset.mjs`
 
 Finding:
@@ -102,6 +105,10 @@ Finding:
   or JSON provider error envelope. The external API checklist should call out
   provider text errors explicitly, and target smoke scripts should summarize
   redaction, empty-state, provider-error, and fallback axes directly.
+- `npm run test:planner` was deterministic, local, non-network, and reasonably
+  fast, but was initially grouped with focused smoke commands instead of being
+  reviewed as a normal completion gate candidate. This led to
+  `docs/failures/0004-deterministic-behavior-check-remained-focused-without-gate-placement-review.md`.
 
 Limitations:
 

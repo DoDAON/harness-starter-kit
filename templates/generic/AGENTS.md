@@ -23,7 +23,10 @@
 
 ## Commands
 
-Document the exact commands agents should run before finishing work.
+Document the exact commands agents should run before finishing work. Name this
+repository's normal completion gate, whether it is `make test`, `just check`, a
+package script, CI workflow, `scripts/check_harness.py`, or another local
+command.
 
 ```powershell
 # TODO: replace with target project commands
@@ -128,6 +131,13 @@ Before reporting completion:
 
 - Run the documented checks relevant to the change.
 - Add or update tests for behavior changes.
+- When adding deterministic, local, non-network, reasonably fast checks for
+  product behavior that agents are expected to verify repeatedly, include them
+  in the documented normal completion gate or explain why they remain focused
+  or manual.
+- Keep live API, credential, quota, provider-uptime, visual, device, slow, or
+  otherwise fragile checks outside the normal gate unless they are stable and
+  expected in this repository's normal environment.
 - For broad local-server, emulator, device, or hardware-dependent work,
   document the scenario test note or explain why build-only validation is
   enough.

@@ -44,6 +44,25 @@ A good script should:
   `fallbackChecked`
 - avoid writing files unless the script is explicitly a generator
 
+## Gate Placement
+
+When a new verification script or test proves product behavior, decide where it
+belongs before finishing the change.
+
+Deterministic, local, non-network, reasonably fast checks for product behavior
+that agents are expected to verify repeatedly should be included in the
+documented normal completion gate, or have a documented reason for remaining
+focused or manual.
+
+Keep live API, credential, quota, provider-uptime, visual, device, slow, watcher,
+or hardware-dependent checks outside the normal gate unless they are stable,
+safe, and expected in the target repository's normal environment.
+
+Do not assume the normal gate is named `check:harness`. Use the target
+repository's actual workflow, such as `make test`, `just check`, package
+scripts, CI workflows, `scripts/check_harness.py`, or another documented local
+command.
+
 ## Transparent Harness Commands
 
 If a target project uses `check:harness`, prefer named subcommands so the final
@@ -86,7 +105,10 @@ The summary should describe what was checked, not just that the command passed.
 When a verification script becomes part of normal work:
 
 - document it in `AGENTS.md` or the project README
-- include it in `check:harness` only if it is safe and stable by default
+- include it in the documented normal completion gate only if it is safe and
+  stable by default
+- document focused or manual checks that remain outside the normal gate, with
+  the reason
 - add a failure record if the script protects a bug path that should not recur
 - explain skipped live checks in the final report rather than pretending build
   validation covered runtime behavior

@@ -125,6 +125,13 @@ automation.
    - Are important rules enforceable through lint, tests, type checks, import
      rules, CI, or drift checks where practical?
    - If automation is not practical, is the manual review point documented?
+   - Are deterministic, local, non-network, reasonably fast checks for product
+     behavior that agents are expected to verify repeatedly
+     included in the documented normal completion gate, or is there a recorded
+     reason they remain focused or manual?
+   - Are live API, credential, quota, provider-uptime, visual, device, slow, or
+     otherwise fragile checks kept separate from the normal gate when they are
+     unsafe as default verification?
    - Were the right local checks run for the files changed?
    - Are missing checks or unverified assumptions named clearly?
 8. Challenge durable memory:
@@ -171,6 +178,10 @@ Findings:
 
 Missing Checks:
 - <check that should be run, why it matters, or "none">
+
+Gate Placement:
+- <normal completion gate reviewed, deterministic behavior checks included or
+  excluded with reason, and focused/manual checks with reasons>
 
 Durable Memory Assessment:
 - Decision records: <needed, updated, skipped with reason>

@@ -39,6 +39,18 @@ npm.cmd run check:harness
 The command ran syntax checks, `node --test`, baseline document drift checks,
 and baseline structure drift checks successfully.
 
+## Verification Gate Placement
+
+- Normal completion gate: `npm.cmd run check:harness`.
+- Deterministic behavior checks included in the normal gate: Node's built-in
+  `node --test` suite ran through `check:harness`.
+- Focused or manual checks outside the normal gate: installer smoke validation
+  and intentional failure probes for `temp_debug.js`, `console.log(`, and broken
+  Markdown links.
+- Reasons for focused/manual placement: installer re-run behavior and
+  intentional-failure probes validate adoption tooling, not normal target
+  repository completion work.
+
 ## Drift Checks Added
 
 - Baseline doc hygiene: broken local Markdown links and stale file references.

@@ -40,6 +40,20 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("docs", text)
         self.assertIn("harness", text)
 
+    def test_effectiveness_plan_check_matches_generic_template(self) -> None:
+        root_script = (
+            REPO_ROOT / "scripts" / "check_effectiveness_plan.py"
+        ).read_text(encoding="utf-8")
+        generic_script = (
+            REPO_ROOT
+            / "templates"
+            / "generic"
+            / "scripts"
+            / "check_effectiveness_plan.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertEqual(root_script, generic_script)
+
     def test_effectiveness_measurement_is_wired_into_adoption_flow(self) -> None:
         adoption_report = (
             REPO_ROOT / "docs" / "templates" / "adoption-report.md"
@@ -686,6 +700,124 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("emptyStateChecked", verification_scripts)
         self.assertIn("providerErrorChecked", verification_scripts)
         self.assertIn("TodayBus External API Dogfood", lifecycle_pilots)
+
+    def test_gate_placement_guidance_is_wired_into_harness_workflows(self) -> None:
+        workflow_paths = (
+            "commands/harness-refresh.md",
+            "commands/harness-review.md",
+            "templates/generic/AGENTS.md",
+            "docs/checklists/verification-scripts.md",
+            "docs/adoption-workflow.md",
+            "docs/prompts/apply-to-target-repo.md",
+            "docs/checklists/harness-review.md",
+        )
+        for relative in workflow_paths:
+            with self.subTest(path=relative):
+                text = (REPO_ROOT / relative).read_text(encoding="utf-8")
+                normalized = " ".join(text.lower().split())
+                self.assertIn(
+                    "deterministic, local, non-network, reasonably fast",
+                    normalized,
+                )
+                self.assertIn("checks for product behavior", normalized)
+                self.assertIn("normal completion gate", normalized)
+                self.assertIn("focused or manual", normalized)
+
+        verification_scripts = (
+            REPO_ROOT / "docs" / "checklists" / "verification-scripts.md"
+        ).read_text(encoding="utf-8")
+        normalized_verification = " ".join(verification_scripts.split())
+        self.assertIn("Gate Placement", verification_scripts)
+        self.assertIn(
+            "Do not assume the normal gate is named `check:harness`",
+            normalized_verification,
+        )
+        self.assertIn("make test", normalized_verification)
+        self.assertIn("just check", normalized_verification)
+        self.assertIn("scripts/check_harness.py", normalized_verification)
+        self.assertIn(
+            "live API, credential, quota, provider-uptime",
+            normalized_verification,
+        )
+
+        adoption_report = (
+            REPO_ROOT / "docs" / "templates" / "adoption-report.md"
+        ).read_text(encoding="utf-8")
+        for phrase in (
+            "## Verification Gate Placement",
+            "Normal completion gate",
+            "Deterministic behavior checks included in the normal gate",
+            "Focused or manual checks outside the normal gate",
+            "Reasons for focused/manual placement",
+        ):
+            self.assertIn(phrase, adoption_report)
+
+        for report in sorted((REPO_ROOT / "examples").glob("*-adoption-report.md")):
+            with self.subTest(adoption_report=report.name):
+                text = report.read_text(encoding="utf-8")
+                self.assertIn("## Verification Gate Placement", text)
+                self.assertIn("Normal completion gate", text)
+                self.assertIn(
+                    "Deterministic behavior checks included in the normal gate",
+                    text,
+                )
+                self.assertIn("Focused or manual checks outside the normal gate", text)
+                self.assertIn("Reasons for focused/manual placement", text)
+
+        review_command = (
+            REPO_ROOT / "commands" / "harness-review.md"
+        ).read_text(encoding="utf-8")
+        refresh_command = (
+            REPO_ROOT / "commands" / "harness-refresh.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Gate Placement:", review_command)
+        self.assertIn("Gate Placement Review:", refresh_command)
+
+        review_template = (
+            REPO_ROOT / "docs" / "templates" / "harness-review-report.md"
+        ).read_text(encoding="utf-8")
+        review_example = (
+            REPO_ROOT / "docs" / "examples" / "harness-review-report.md"
+        ).read_text(encoding="utf-8")
+        for text in (review_template, review_example):
+            self.assertIn("Gate Placement", text)
+            self.assertIn("Normal completion gate", text)
+            self.assertIn("Deterministic behavior checks", text)
+            self.assertIn("Focused/manual checks", text)
+
+        lifecycle_pilots = (
+            REPO_ROOT / "docs" / "examples" / "lifecycle-pilot-results.md"
+        ).read_text(encoding="utf-8")
+        normalized_lifecycle = " ".join(lifecycle_pilots.split())
+        self.assertIn("normal-gate placement candidates", normalized_lifecycle)
+        self.assertIn("npm run test:planner", normalized_lifecycle)
+        self.assertIn("focused live checks", normalized_lifecycle)
+
+        failure_memory = (
+            REPO_ROOT
+            / "docs"
+            / "failures"
+            / "0004-deterministic-behavior-check-remained-focused-without-gate-placement-review.md"
+        ).read_text(encoding="utf-8")
+        decision_memory = (
+            REPO_ROOT
+            / "docs"
+            / "decisions"
+            / "0003-review-gate-placement-for-deterministic-behavior-checks.md"
+        ).read_text(encoding="utf-8")
+        normalized_failure = " ".join(failure_memory.split())
+        normalized_decision = " ".join(decision_memory.split())
+        self.assertIn("Deterministic Behavior Check Remained Focused", failure_memory)
+        self.assertIn("normal completion gate", normalized_failure)
+        self.assertIn("check:harness", normalized_failure)
+        self.assertIn(
+            "Regression coverage lives in `tests/test_repository_hygiene.py`",
+            failure_memory,
+        )
+        self.assertIn("Review Gate Placement For Deterministic Behavior Checks", decision_memory)
+        self.assertIn("Accepted", decision_memory)
+        self.assertIn("prompt-first governance and reporting rule", normalized_decision)
+        self.assertIn("Do not assume it is called `check:harness`", decision_memory)
 
 
 if __name__ == "__main__":

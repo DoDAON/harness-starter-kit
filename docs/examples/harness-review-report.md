@@ -31,6 +31,13 @@ Missing Checks:
 - Run the changed structure check against a fixture that intentionally violates
   the new rule.
 
+Gate Placement:
+- Normal completion gate reviewed: `python scripts/check_harness.py`.
+- Deterministic behavior checks: the new structure fixture check should be
+  included in the normal gate once it is stable.
+- Focused/manual checks: none; no live, device, visual, or provider-dependent
+  checks were added.
+
 Durable Memory Assessment:
 - Decision records: skipped; this documentation change does not choose a new
   architecture, framework, or integration boundary.
@@ -78,6 +85,12 @@ Findings:
 Missing Checks:
 - Run `python -m unittest tests.test_repository_hygiene` after changing the
   command contract.
+
+Gate Placement:
+- Normal completion gate reviewed: repository documentation validation suite.
+- Deterministic behavior checks: not applicable; this review command change did
+  not add a product-behavior check.
+- Focused/manual checks: none.
 
 Durable Memory Assessment:
 - Decision records: skipped; this refines command behavior without choosing a

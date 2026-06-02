@@ -34,6 +34,16 @@ The command ran:
 All checks passed. The sample project had zero Django tests, so the next useful
 improvement would be adding behavior tests for real app logic.
 
+## Verification Gate Placement
+
+- Normal completion gate:
+  `.\.venv\Scripts\python.exe scripts\check_harness.py`.
+- Deterministic behavior checks included in the normal gate: `manage.py check`
+  and `manage.py test`; no real product-behavior tests existed yet in the sample
+  scaffold.
+- Focused or manual checks outside the normal gate: none.
+- Reasons for focused/manual placement: not applicable.
+
 ## Findings
 
 - A Python `scripts/check_harness.py` entrypoint fits Django projects well when

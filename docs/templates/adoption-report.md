@@ -28,6 +28,19 @@ TODO: command
 
 Result: TODO
 
+## Verification Gate Placement
+
+- Normal completion gate: TODO: command, package script, CI workflow,
+  `scripts/check_harness.py`, or other documented default verification path.
+- Deterministic behavior checks included in the normal gate: TODO: list local,
+  non-network, reasonably fast checks for product behavior, or explain why none
+  were added.
+- Focused or manual checks outside the normal gate: TODO: list live API,
+  credential, quota, provider-uptime, visual, device, slow, watcher, or other
+  checks kept separate.
+- Reasons for focused/manual placement: TODO: explain why each separated check
+  is not safe, stable, fast, or expected in normal verification.
+
 ## Server Or Fixture Verification
 
 - Required: TODO: yes/no and why.

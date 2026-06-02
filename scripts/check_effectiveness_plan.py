@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate adoption-time harness effectiveness measurement reports."""
+"""Validate adoption reports and harness effectiveness measurement reports."""
 
 from __future__ import annotations
 
@@ -40,6 +40,13 @@ ADOPTION_FIELDS = (
     "Task outcome records location",
 )
 
+GATE_PLACEMENT_FIELDS = (
+    "Normal completion gate",
+    "Deterministic behavior checks included in the normal gate",
+    "Focused or manual checks outside the normal gate",
+    "Reasons for focused/manual placement",
+)
+
 EFFECTIVENESS_SECTIONS = (
     "## Target",
     "## Task Set",
@@ -48,6 +55,7 @@ EFFECTIVENESS_SECTIONS = (
 )
 
 TODO_RE = re.compile(r"\bTODO\b", flags=re.IGNORECASE)
+SECTION_RE = re.compile(r"^##\s+", flags=re.MULTILINE)
 
 
 @dataclass(frozen=True)
@@ -59,8 +67,9 @@ class Finding:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Validate that adoption and effectiveness reports contain "
-            "measurement details instead of placeholders."
+            "Validate that adoption reports contain gate-placement and "
+            "measurement details, and effectiveness reports contain required "
+            "sections instead of placeholders."
         )
     )
     parser.add_argument(
@@ -98,11 +107,45 @@ def iter_reports(root: Path) -> list[Path]:
 
 
 def field_value(text: str, field: str) -> str | None:
-    pattern = re.compile(rf"^\s*-\s*{re.escape(field)}:\s*(.*)$", re.MULTILINE)
-    match = pattern.search(text)
-    if match is None:
+    pattern = re.compile(rf"^(\s*)-\s*{re.escape(field)}:\s*(.*)$")
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        match = pattern.match(line)
+        if match is None:
+            continue
+
+        base_indent = len(match.group(1))
+        parts = [match.group(2).strip()]
+        for continuation in lines[index + 1 :]:
+            stripped = continuation.strip()
+            if not stripped:
+                break
+            indent = len(continuation) - len(continuation.lstrip())
+            if indent <= base_indent:
+                break
+            parts.append(stripped)
+
+        return " ".join(part for part in parts if part).strip()
+
+    return None
+
+
+def section_text(text: str, heading: str) -> str | None:
+    lines = text.splitlines()
+    start_index = next(
+        (index for index, line in enumerate(lines) if line.strip() == heading),
+        None,
+    )
+    if start_index is None:
         return None
-    return match.group(1).strip()
+
+    section_lines = [lines[start_index]]
+    for line in lines[start_index + 1 :]:
+        if SECTION_RE.match(line):
+            break
+        section_lines.append(line)
+
+    return "\n".join(section_lines)
 
 
 def is_placeholder(value: str | None) -> bool:
@@ -111,16 +154,27 @@ def is_placeholder(value: str | None) -> bool:
 
 def validate_adoption_report(path: Path, text: str) -> list[Finding]:
     findings: list[Finding] = []
-    if "## Effectiveness Measurement Plan" not in text:
+    effectiveness_section = section_text(text, "## Effectiveness Measurement Plan")
+    if effectiveness_section is None:
         findings.append(
             Finding(path, "missing ## Effectiveness Measurement Plan section")
         )
-        return findings
+    else:
+        for field in ADOPTION_FIELDS:
+            value = field_value(effectiveness_section, field)
+            if is_placeholder(value):
+                findings.append(Finding(path, f"incomplete measurement field: {field}"))
 
-    for field in ADOPTION_FIELDS:
-        value = field_value(text, field)
-        if is_placeholder(value):
-            findings.append(Finding(path, f"incomplete measurement field: {field}"))
+    gate_section = section_text(text, "## Verification Gate Placement")
+    if gate_section is None:
+        findings.append(Finding(path, "missing ## Verification Gate Placement section"))
+    else:
+        for field in GATE_PLACEMENT_FIELDS:
+            value = field_value(gate_section, field)
+            if is_placeholder(value):
+                findings.append(
+                    Finding(path, f"incomplete gate-placement field: {field}")
+                )
 
     return findings
 

@@ -164,6 +164,13 @@ Make the common path fast:
   typecheck, tests, or build alone. See
   `docs/checklists/verification-scripts.md`.
 
+Record the target repository's normal completion gate by its real command or
+workflow name, such as `make test`, `just check`, a package script, CI workflow,
+`scripts/check_harness.py`, or another documented local command. When adoption
+adds deterministic, local, non-network, reasonably fast checks for product
+behavior that agents are expected to verify repeatedly, include them in that
+normal gate or document why they remain focused or manual.
+
 Before broad feature implementation, write a small scenario test note or
 explicitly say why build-only validation is enough. The note can be a compact
 matrix of user flows, setup data, server state, automated checks, and manual
@@ -230,8 +237,10 @@ Finish with a short adoption report. Use
 
 The report should make clear what the agent observed, which existing structures
 were reused, which snippets were adopted or skipped, which checks were run, and
-whether the nested `harness-starter-kit/` clone should be removed, ignored, or
-kept intentionally before committing.
+which checks belong to the normal completion gate versus focused or manual
+verification. For focused or manual checks, record why they are not part of the
+normal gate. Also report whether the nested `harness-starter-kit/` clone should
+be removed, ignored, or kept intentionally before committing.
 
 If implementation changed behavior, added a new integration boundary, or chose
 a defensive fallback for permissions, hardware, networking, persistence, or

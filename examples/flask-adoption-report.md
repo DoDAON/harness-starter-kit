@@ -33,6 +33,16 @@ The command ran:
 
 All checks passed.
 
+## Verification Gate Placement
+
+- Normal completion gate:
+  `.\.venv\Scripts\python.exe scripts\check_harness.py`.
+- Deterministic behavior checks included in the normal gate:
+  `python -m unittest discover -s tests` and
+  `python -m flask --app sample_flask routes`.
+- Focused or manual checks outside the normal gate: none.
+- Reasons for focused/manual placement: not applicable.
+
 ## Findings
 
 - `python -m unittest discover -s tests` is safer than bare

@@ -32,6 +32,14 @@ The command ran:
 
 All checks passed.
 
+## Verification Gate Placement
+
+- Normal completion gate: `python scripts\check_harness.py`.
+- Deterministic behavior checks included in the normal gate: `.\mvnw.cmd test`,
+  including the Spring Boot application context test.
+- Focused or manual checks outside the normal gate: none.
+- Reasons for focused/manual placement: not applicable.
+
 ## Findings
 
 - Prefer Maven or Gradle wrappers over global build tool installations so

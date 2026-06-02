@@ -22,6 +22,14 @@ output.
 - TODO: list validation, tests, lint, type checks, docs drift checks, structure
   checks, or manual checks that should be run before completion.
 
+## Gate Placement
+
+- Normal completion gate reviewed: TODO: command, package script, CI workflow,
+  `scripts/check_harness.py`, or other documented default verification path.
+- Deterministic behavior checks: TODO: included in the normal gate, excluded
+  with reason, or not applicable.
+- Focused/manual checks: TODO: checks kept outside the normal gate and why.
+
 ## Durable Memory Assessment
 
 - Decision records: TODO: needed, updated, or skipped with reason.

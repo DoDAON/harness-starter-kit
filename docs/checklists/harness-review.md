@@ -17,6 +17,13 @@ the current change set; use this checklist for periodic harness maintenance.
       dependency, or server fixture policy change without a decision record?
 - [ ] Do local servers, database seeds, JARs, docker-compose services, mock APIs,
       emulators, or device prerequisites have a documented verification plan?
+- [ ] Are deterministic, local, non-network, reasonably fast checks for product
+      behavior that agents are expected to verify repeatedly included in the
+      documented normal completion gate, or is there a recorded reason they
+      remain focused or manual?
+- [ ] Are live API, credential, quota, provider-uptime, visual, device, slow, or
+      otherwise fragile checks kept separate from the normal gate when they are
+      unsafe as default verification?
 - [ ] For broad feature work, is there a scenario test note, or a written reason
       build-only validation is enough?
 - [ ] If localized text is present, are UTF-8 and mojibake risks covered by a

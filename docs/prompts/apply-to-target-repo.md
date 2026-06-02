@@ -109,6 +109,12 @@ Expected work:
   explain the tradeoff first.
 - Add stack-specific lint/type/test recommendations based on the detected
   language.
+- Record this repository's normal completion gate by its real command or
+  workflow name, such as `make test`, `just check`, package scripts, CI workflow,
+  `scripts/check_harness.py`, or another documented local command.
+- If you add deterministic, local, non-network, reasonably fast checks for
+  product behavior that agents are expected to verify repeatedly, include them
+  in the normal completion gate or document why they remain focused or manual.
 - If the repo includes a local server, database seed, docker-compose, JAR, mock
   API, or backend fixture, document how to run and verify it or explain why it
   was not run.
@@ -167,6 +173,8 @@ Finish by reporting:
 - checks I can run locally
 - effectiveness measurement plan
 - server or fixture verification plan
+- normal completion gate, deterministic behavior checks included in it, and
+  focused/manual checks kept separate with reasons
 - scenario test note for broad feature work, or the reason build-only validation
   is enough
 - failure memory recorded or skipped with reason

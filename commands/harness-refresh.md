@@ -40,6 +40,10 @@ records, obsolete failure notes, stale decisions, or unused harness checks.
    - duplicated guidance split across `AGENTS.md`, README files, and docs
    - obsolete decisions or failure records contradicted by current code
    - harness checks that no normal command, CI workflow, or documentation uses
+   - deterministic, local, non-network, reasonably fast checks for product
+     behavior that agents are expected to verify repeatedly, but are not
+     included in the documented normal completion gate and have no recorded
+     reason for remaining focused or manual
    - rules that describe architecture constraints no check or review point can
      enforce
 5. For large docs directories, list files first and read only records relevant
@@ -77,6 +81,10 @@ Archive/Delete Candidates:
 
 Checks Run:
 - <command>: <result>
+
+Gate Placement Review:
+- <normal completion gate, deterministic behavior checks included, and
+  focused/manual checks with reasons>
 
 Manual Decisions Needed:
 - <maintainer decision needed before delete, archive, CI, dependency, or
