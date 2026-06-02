@@ -84,8 +84,8 @@ Expected result:
 - lightweight drift checks based on this repo's real rules
 - local verification commands using existing tools
 - adoption report with files changed, checks to run, assumptions, remaining
-  manual steps, and whether ./harness-starter-kit should be removed, ignored, or
-  kept before commit
+  manual steps, normal/focused/manual gate placement, and whether
+  ./harness-starter-kit should be removed, ignored, or kept before commit
 ```
 
 For the full prompt and workflow details, see
