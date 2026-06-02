@@ -216,6 +216,93 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("does not replace a decision record", normalized)
         self.assertIn("Decision docs:", normalized)
         self.assertIn("API/mock boundary", normalized)
+        self.assertIn("input contract", normalized)
+        self.assertIn("input semantics", normalized)
+        self.assertIn("state normalization", normalized)
+        self.assertIn("fallback policy", normalized)
+        self.assertIn("displayed decision criteria", normalized)
+
+    def test_decision_memory_warning_script_is_wired_into_harness(self) -> None:
+        script = REPO_ROOT / "scripts" / "check_decision_memory.py"
+        generic_script = (
+            REPO_ROOT / "templates" / "generic" / "scripts" / "check_decision_memory.py"
+        )
+        rules = REPO_ROOT / ".harness" / "decision-memory-rules.json"
+        generic_rules = (
+            REPO_ROOT
+            / "templates"
+            / "generic"
+            / ".harness"
+            / "decision-memory-rules.json"
+        )
+        component_map = (REPO_ROOT / "docs" / "component-map.md").read_text(
+            encoding="utf-8"
+        )
+        validation = (REPO_ROOT / "docs" / "validation.md").read_text(
+            encoding="utf-8"
+        )
+        root_workflow = (
+            REPO_ROOT / ".github" / "workflows" / "harness-check.yml"
+        ).read_text(encoding="utf-8")
+        generic_workflow = (
+            REPO_ROOT
+            / "templates"
+            / "generic"
+            / ".github"
+            / "workflows"
+            / "harness-check.yml"
+        ).read_text(encoding="utf-8")
+        agent_template = (REPO_ROOT / "templates" / "generic" / "AGENTS.md").read_text(
+            encoding="utf-8"
+        )
+        adoption_prompt = (
+            REPO_ROOT / "docs" / "prompts" / "apply-to-target-repo.md"
+        ).read_text(encoding="utf-8")
+
+        for path in (script, generic_script, rules, generic_rules):
+            self.assertTrue(path.exists(), path)
+
+        script_text = script.read_text(encoding="utf-8")
+        generic_text = generic_script.read_text(encoding="utf-8")
+        self.assertEqual(script_text, generic_text)
+        root_rules = json.loads(rules.read_text(encoding="utf-8"))
+        template_rules = json.loads(generic_rules.read_text(encoding="utf-8"))
+        self.assertIn(".github/workflows/**", root_rules["watched_paths"])
+        self.assertIn("AGENTS.md", root_rules["watched_paths"])
+        self.assertIn("scripts/**", root_rules["watched_paths"])
+        self.assertIn("templates/**", root_rules["watched_paths"])
+        self.assertIn("commands/**", root_rules["watched_paths"])
+        self.assertIn("src/**", template_rules["watched_paths"])
+        self.assertIn("scripts/**", template_rules["ignored_paths"])
+        self.assertNotEqual(root_rules, template_rules)
+        self.assertIn("--fail-on-warning", script_text)
+        self.assertIn("Decision memory review warning", script_text)
+        self.assertIn("input semantics", script_text)
+        self.assertIn("displayed", script_text)
+        self.assertIn("decision criteria", script_text)
+
+        for text in (component_map, validation, agent_template, adoption_prompt):
+            self.assertIn("check_decision_memory.py", text)
+
+        for text in (root_workflow, generic_workflow):
+            self.assertIn("fetch-depth: 0", text)
+            self.assertIn("github.event.pull_request.base.sha", text)
+            self.assertIn("--base", text)
+            self.assertIn("local smoke", text)
+
+    def test_ui_profiles_call_out_decision_memory_triggers(self) -> None:
+        for relative in (
+            "templates/profiles/typescript/README.md",
+            "templates/profiles/nextjs/README.md",
+            "templates/profiles/react/README.md",
+            "templates/profiles/vue/README.md",
+        ):
+            with self.subTest(profile=relative):
+                text = (REPO_ROOT / relative).read_text(encoding="utf-8")
+                normalized = " ".join(text.split())
+                self.assertIn("input semantics", normalized)
+                self.assertIn("fallback behavior", normalized)
+                self.assertIn("displayed decision criteria", normalized)
 
     def test_harness_update_command_is_documented_and_linked(self) -> None:
         update_command = (REPO_ROOT / "commands" / "harness-update.md").read_text(

@@ -64,6 +64,11 @@ governance. Do not add every artifact by default.
   permissions, hardware, persistence, state management, or networking boundary
   changes. Use `docs/checklists/decision-failure-memory.md` to distinguish
   ADRs, failure notes, domain docs, convention updates, and final-report notes.
+- Before finishing implementation work: ask whether the diff changed user
+  workflow, input contract, input semantics, state normalization, API request or
+  response shape, fallback policy, or displayed decision criteria. If yes,
+  either add or update a decision record, cite the existing ADR, or explain why
+  no decision memory is needed.
 - Broad feature work: write a small scenario test note. For narrow fixes, name
   the relevant check or explain why build-only validation is enough.
 
@@ -181,6 +186,9 @@ Install lightweight baseline drift checks:
 - missing files referenced by docs
 - broken local Markdown links
 - forbidden temporary filenames
+- watched implementation diffs without a decision-record change, reported as a
+  warning that asks the final report to add an ADR, cite an existing ADR, or
+  explain why no decision memory is needed
 - invalid UTF-8 or common mojibake markers when the target has localized
   comments, XML resources, PDF-derived instructions, or prior encoding drift
 - unused code checks for the chosen stack
@@ -188,6 +196,17 @@ Install lightweight baseline drift checks:
 Then add target-specific drift checks only when they enforce real repository
 rules. Generic checks keep the harness tidy; project-specific checks keep the
 architecture honest.
+
+When using `scripts/check_decision_memory.py`, tune
+`.harness/decision-memory-rules.json` to the target repository's real
+implementation paths. Remove ignored patterns such as `scripts/**` when those
+paths contain product behavior, workflow code, API smoke behavior, or other
+decision-bearing implementation.
+
+In CI, run `scripts/check_decision_memory.py --base <base-ref>` for pull
+request comparisons. Non-PR scheduled or manual runs without a changed working
+tree are smoke checks for script health, not proof that no decision memory is
+needed for a future diff.
 
 Examples:
 

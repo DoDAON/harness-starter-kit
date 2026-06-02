@@ -47,6 +47,13 @@ was not changed and no existing ADR or scoped justification is named.
 
 This is intentionally a review warning, not an automatic drift failure.
 
+The kit also adds `scripts/check_decision_memory.py` as a configurable
+diff-based warning gate. When watched implementation paths changed and
+`docs/decisions/` did not, the script asks the final report to add or update an
+ADR, cite an existing ADR, or explain why no decision memory is needed. The
+script warns by default and can be promoted with `--fail-on-warning` after a
+target repository tunes `.harness/decision-memory-rules.json`.
+
 ## Agent Guidance
 
 Do not treat domain glossary updates as a substitute for decision records. For

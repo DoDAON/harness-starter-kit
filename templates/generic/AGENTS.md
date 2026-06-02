@@ -74,7 +74,10 @@ Add or update durable docs when behavior, architecture, commands, conventions,
 or known failures change. If no `docs/` file is updated for a non-trivial code
 change, explain why in the final report.
 
-For non-trivial product or workflow structure, integration or mock
+Before finishing, ask whether the change alters user workflow, input contract,
+input semantics, state normalization, API request or response shape, fallback
+policy, or displayed decision criteria. If it does, or if the change otherwise
+affects non-trivial product or workflow structure, integration or mock
 external-behavior boundaries, major data models, state classifications, or UX
 principles that become code structure, handle decision memory explicitly: add
 or update `docs/decisions/*.md`, cite the existing ADR that covers the choice,
@@ -129,8 +132,12 @@ Before reporting completion:
   document the scenario test note or explain why build-only validation is
   enough.
 - Confirm no temporary files were left behind.
+- If `scripts/check_decision_memory.py` exists, run it for implementation diffs
+  before the final report. Treat warnings as a prompt to add or update an ADR,
+  cite an existing ADR, or explain why no decision memory is needed.
 - Update docs when behavior, architecture, commands, or known failures changed.
 - Decision docs: added or updated `docs/decisions/*.md`, cited an existing ADR,
   or explained why no decision record was needed for structural behavior,
-  workflow, API/mock boundary, data model, state, or UX changes.
+  workflow, input contract or semantics, API/mock boundary, data model, state,
+  fallback policy, displayed decision criteria, or UX changes.
 - Summarize changed files, verification performed, and remaining risks.

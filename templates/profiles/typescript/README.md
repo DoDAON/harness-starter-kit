@@ -43,7 +43,8 @@ When JavaScript or TypeScript is introduced after generic adoption:
 - Update `docs/conventions/coding.md` with module layout, import, testing, and
   type-checking conventions that agents should repeat.
 - Consider a decision record when changing or selecting module boundaries,
-  runtime, state, or integration policy. When the task only follows the existing
+  runtime, state, integration policy, input semantics, fallback behavior, or
+  displayed decision criteria. When the task only follows the existing
   architecture or makes a narrow fix, a final report or check note is enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.

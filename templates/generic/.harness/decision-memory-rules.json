@@ -1,0 +1,20 @@
+{
+  "watched_paths": [
+    "src/**",
+    "app/**",
+    "lib/**",
+    "components/**",
+    "pages/**"
+  ],
+  "decision_paths": [
+    "docs/decisions/**"
+  ],
+  "ignored_paths": [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/__snapshots__/**",
+    "docs/**",
+    "scripts/**",
+    "templates/**"
+  ]
+}

@@ -87,6 +87,12 @@ class FixtureSmokeTests(unittest.TestCase):
                     self.assertTrue((target / "AGENTS.md").exists())
                     self.assertTrue((target / "docs" / "decisions").is_dir())
                     self.assertTrue((target / "docs" / "failures").is_dir())
+                    self.assertTrue(
+                        (target / "scripts" / "check_decision_memory.py").exists()
+                    )
+                    self.assertTrue(
+                        (target / ".harness" / "decision-memory-rules.json").exists()
+                    )
                     self.assertFalse(
                         (target / ".github" / "workflows" / "harness-check.yml").exists()
                     )
@@ -98,6 +104,7 @@ class FixtureSmokeTests(unittest.TestCase):
                     self.run_generated_check(target, "check_docs_drift.py")
                     self.run_generated_check(target, "check_structure.py")
                     self.run_generated_check(target, "check_effectiveness_plan.py")
+                    self.run_generated_check(target, "check_decision_memory.py")
 
 
 if __name__ == "__main__":

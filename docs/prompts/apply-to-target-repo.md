@@ -117,6 +117,11 @@ Expected work:
   and any focused smoke command that verifies the path.
 - Before broad feature implementation, write a small scenario test note or explicitly
   say why build-only validation is enough.
+- Before finishing implementation work, ask whether the diff changed user
+  workflow, input contract, input semantics, state normalization, API request or
+  response shape, fallback policy, or displayed decision criteria. If yes, add
+  or update a decision record, cite the existing ADR, or explain why no decision
+  memory is needed.
 - If localized source, XML resources, PDF-derived instructions, or mojibake risk
   exists, run or document an encoding audit before broad edits.
 - Fill the Effectiveness Measurement Plan in the adoption report. If baseline
@@ -138,6 +143,14 @@ Expected work:
 Drift check examples:
 - If AGENTS.md says routes must not access the database directly, add a check
   that fails on forbidden database imports in route files.
+- If watched app paths changed but `docs/decisions/` did not, run or adapt
+  `scripts/check_decision_memory.py` so the final report explicitly adds an
+  ADR, cites an existing ADR, or explains why no decision memory is needed.
+  Tune `.harness/decision-memory-rules.json` to this repository's real source
+  paths before treating the warning as meaningful; do not keep `scripts/**`
+  ignored if scripts contain product behavior or workflow code.
+  In CI, pass a real PR base ref with `--base`; scheduled or manual clean
+  checkout runs are only smoke checks for this script.
 - If a decision record says Zustand is the chosen state library, add a check
   that fails when Redux dependencies are added.
 - If generated files must live under one directory, add a structure check that

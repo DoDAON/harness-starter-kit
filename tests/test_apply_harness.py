@@ -42,6 +42,10 @@ class ApplyHarnessTests(unittest.TestCase):
             self.assertTrue(
                 (target / "scripts" / "check_effectiveness_plan.py").exists()
             )
+            self.assertTrue((target / "scripts" / "check_decision_memory.py").exists())
+            self.assertTrue(
+                (target / ".harness" / "decision-memory-rules.json").exists()
+            )
             self.assertFalse(
                 (target / ".github" / "workflows" / "harness-check.yml").exists()
             )
@@ -169,6 +173,13 @@ class ApplyHarnessTests(unittest.TestCase):
                 text=True,
             )
             self.assertEqual(0, result4.returncode)
+            result5 = subprocess.run(
+                [sys.executable, str(target / "scripts" / "check_decision_memory.py")],
+                cwd=target,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(0, result5.returncode)
 
     def test_fastapi_profile_snippets_are_written_under_docs_harness(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

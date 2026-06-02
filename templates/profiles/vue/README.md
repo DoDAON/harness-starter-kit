@@ -55,9 +55,9 @@ When Vue or Vite is introduced after generic adoption:
 - Update `docs/conventions/coding.md` with component, state, routing, styling,
   and testing conventions.
 - Consider a decision record when changing or selecting Vue/Vite, a routing
-  approach, or a state management approach. When the task only follows the
-  existing architecture or makes a narrow fix, a final report or check note is
-  enough.
+  approach, state management approach, input semantics, fallback behavior, or
+  displayed decision criteria. When the task only follows the existing
+  architecture or makes a narrow fix, a final report or check note is enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.
 
@@ -72,5 +72,8 @@ When Vue or Vite is introduced after generic adoption:
   component contracts.
 - Do not access `$parent` or mutate props directly; communicate via emits or
   shared stores.
+- Treat UI-only looking changes as decision-memory candidates when they alter
+  input meaning, state normalization, or the criteria shown to users for a
+  product decision.
 - Do not edit or commit `dist/`, `node_modules/`, Vite cache directories, or
   the local `harness-starter-kit/` clone.

@@ -1,0 +1,22 @@
+{
+  "watched_paths": [
+    ".github/workflows/**",
+    "AGENTS.md",
+    "commands/**",
+    "docs/adoption-workflow.md",
+    "docs/checklists/**",
+    "docs/prompts/**",
+    "docs/templates/**",
+    "scripts/**",
+    "templates/**"
+  ],
+  "decision_paths": [
+    "docs/decisions/**"
+  ],
+  "ignored_paths": [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/__snapshots__/**",
+    "templates/generic/scripts/check_decision_memory.py"
+  ]
+}

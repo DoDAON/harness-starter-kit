@@ -25,6 +25,8 @@ Consider a decision record when the change:
 - selects or changes architecture, router shape, persistence, runtime, state, or
   integration policy
 - codifies product workflow structure in code
+- changes input contracts, input semantics, state normalization, API request or
+  response shape, fallback policy, or displayed decision criteria
 - defines live/mock fallback policy or external API ownership
 - introduces a durable data model or state classification
 - changes a rule future agents are likely to re-litigate
@@ -62,6 +64,7 @@ No failure record is usually needed when:
 | --- | --- |
 | Add a planner branch that changes product workflow shape | ADR, or cite an existing workflow ADR |
 | Add a route handler that proxies a public-data API with server-only secrets | ADR if it creates the integration boundary; convention if it follows an existing one |
+| Change a form field from optional to required, normalize a state differently, or show a new ranking criterion | ADR candidate if it changes input semantics or displayed decision criteria; otherwise cite the existing ADR or report why no new decision is needed |
 | Handle provider zero-result responses deliberately | Domain note or test; ADR only if it changes product behavior |
 | Fix a TLS certificate failure that Node fetch hits for a provider endpoint | Failure record if future agents should not retry the same path blindly |
 | Add `scripts/check_<area>.mjs` for a repeated backend smoke check | README or `AGENTS.md` if it becomes normal verification |

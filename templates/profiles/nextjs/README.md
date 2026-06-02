@@ -57,9 +57,10 @@ When Next.js is introduced after generic adoption:
 - Update `docs/conventions/coding.md` with App Router, data fetching, component
   boundary, styling, and testing conventions.
 - Consider a decision record when changing or selecting Next.js, an app/router
-  structure, runtime strategy, or state management approach. When the task only
-  follows the existing architecture or makes a narrow fix, a final report or
-  check note is enough.
+  structure, runtime strategy, state management approach, input semantics,
+  fallback behavior, or displayed decision criteria. When the task only follows
+  the existing architecture or makes a narrow fix, a final report or check note
+  is enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.
 
@@ -83,6 +84,9 @@ When Next.js is introduced after generic adoption:
   states. A zero-result response should not be treated as a parser failure.
 - For live/mock fallback, make the mode explicit and avoid silent production
   fallback unless the target has already chosen that policy.
+- Treat UI-only looking changes as decision-memory candidates when they alter
+  input meaning, state normalization, or the criteria shown to users for a
+  product decision.
 - Add or adapt a focused smoke script when a route handler's external API,
   redaction, empty-result, or provider-error behavior cannot be proven by
   typecheck and build.

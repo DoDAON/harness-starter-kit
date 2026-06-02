@@ -130,12 +130,16 @@ automation.
 8. Challenge durable memory:
    - Does the change require a decision record, failure note, convention update,
      domain note, adoption report update, or effectiveness measurement update?
+   - Ask whether the change alters user workflow, input contract, input
+     semantics, state normalization, API request or response shape, fallback
+     policy, or displayed decision criteria.
    - If the change fixes product or workflow structure in code, changes an
      integration or mock external-behavior boundary, introduces major data
-     models or state classifications, or codifies a product UX principle in
-     implementation, and `docs/decisions/` was not changed, flag whether an
-     existing ADR covers it or why the change is too narrow to need decision
-     memory. Treat this as a diagnostic warning, not an automatic failure.
+     models or state classifications, codifies a product UX principle in
+     implementation, or changes one of the decision-memory trigger axes above,
+     and `docs/decisions/` was not changed, flag whether an existing ADR covers
+     it or why the change is too narrow to need decision memory. Treat this as
+     a diagnostic warning, not an automatic failure.
    - If no durable memory was added, is that justified?
    - If the work fixed a user-visible runtime failure, high-risk bug path,
      failed CI run, failed harness check, repeated agent mistake, or

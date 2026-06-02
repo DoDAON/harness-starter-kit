@@ -77,8 +77,12 @@ Result: TODO
 - `AGENTS.md`: TODO
 - `docs/conventions/coding.md`: TODO
 - `docs/decisions/`: TODO
-- Behavior or integration decisions considered: TODO: explain whether a domain
-  note, report/check note, or ADR was the right durable artifact.
+- Behavior or integration decisions considered: TODO: explain whether user
+  workflow, input contract, input semantics, state normalization, API
+  request/response shape, fallback policy, displayed decision criteria, or
+  integration behavior changed.
+- Decision memory result: TODO: ADR added/updated, existing ADR cited, or no ADR
+  needed with reason.
 - Not updated: TODO: explain why if this adoption or change did not require a
   durable docs update.
 
