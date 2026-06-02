@@ -123,6 +123,13 @@ A new profile should include:
 Candidate profiles include Rails, Laravel, Go, and Rust. Add them only when the
 profile has a real fixture and a clear local verification path.
 
+iOS is also a useful candidate profile to pair with the existing Android
+profile. Because Xcode and simulator checks require macOS, its fixture smoke
+coverage should validate profile installation and portable drift checks, while
+`xcodebuild`, simulator, signing, CocoaPods, Swift Package Manager, and device
+verification guidance should be documented as macOS/manual unless the target
+repository already has macOS CI.
+
 ## Not Currently Prioritized
 
 - Turning the kit into a one-command framework migration tool.
