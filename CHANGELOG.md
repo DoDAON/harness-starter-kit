@@ -2,6 +2,26 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## v0.1.5 - 2026-06-02
+
+Patch release for the decision-memory follow-up to `v0.1.4`. This release moves
+the decision-docs gate from review-only guidance into the generic target
+template that future adoptions copy.
+
+### Added
+
+- Decision-memory guidance in the generic `AGENTS.md` template for non-trivial
+  product or workflow structure, integration or mock external-behavior
+  boundaries, major data models, state classifications, or UX principles that
+  become code structure.
+- A completion criterion requiring agents to report whether decision docs were
+  added, an existing ADR covers the choice, or no decision record was needed.
+- A `Decision-docs gate` field in the harness review report template so the
+  specific `/harness review` diagnostic does not get lost when reviewers use
+  the template.
+- Regression coverage that keeps the generic completion gate and review report
+  gate wired in.
+
 ## v0.1.4 - 2026-06-02
 
 Patch release for governance documentation and review diagnostics. This release
