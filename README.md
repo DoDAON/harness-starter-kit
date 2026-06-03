@@ -17,6 +17,7 @@
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" />
   <img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" />
+  <img alt="Contributors" src="https://img.shields.io/github/contributors/baskduf/harness-starter-kit?style=flat-square" />
 </p>
 
 **English** | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
@@ -279,6 +280,15 @@ python scripts/check_failure_memory.py
 python scripts/check_decision_memory.py
 python scripts/harness_doctor.py --target .
 ```
+
+## Contributors
+
+Thanks to everyone who has helped shape this kit through code, docs, reviews,
+examples, translations, and dogfooding.
+
+<a href="https://github.com/baskduf/harness-starter-kit/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=baskduf/harness-starter-kit" alt="Contributors" />
+</a>
 
 ## License
 
