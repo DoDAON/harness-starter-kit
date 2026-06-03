@@ -124,6 +124,10 @@ mistakes. Measure that separately with task outcomes and effectiveness reports.
 See [`docs/theory/harness-engineering.md`](docs/theory/harness-engineering.md)
 for the model.
 
+Every recurring agent failure should be converted into at least one durable
+artifact: a clearer instruction, an automated constraint, a test or CI check, a
+decision or failure record, or a drift check.
+
 ## Commands
 
 The `/harness ...` names below are prompt conventions by default, not built-in
@@ -131,66 +135,19 @@ editor commands. Type or paste them into your coding agent chat. In editors such
 as Cursor, they will not appear in the command palette unless you separately add
 matching custom slash commands.
 
-### `/harness doctor`
+| Command | Use when |
+| --- | --- |
+| `/harness doctor` | Score baseline harness evidence without modifying files. |
+| `/harness update` | Refresh the local `./harness-starter-kit` reference after adoption. |
+| `/harness refresh` | Review stale, duplicated, obsolete, or unused target harness guidance. |
+| `/harness review` | Challenge the current change set before finishing. |
+| `/harness review sub-agent` | Explicitly request a read-only reviewer subagent when the runtime permits it. |
 
-Run Harness Doctor to evaluate baseline repository evidence for reliable AI
-coding agent collaboration. It reports a five-category Harness Score across
-Agent Instructions, Feedback Loops, Durable Memory, Structural Safety, and
-Adoption Clarity; agent effectiveness and governance maturity remain non-scored
-manual review items.
-
-- Command workflow: [`commands/harness-doctor.md`](commands/harness-doctor.md)
-- Rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
-- Example report: [`docs/examples/harness-doctor-report.md`](docs/examples/harness-doctor-report.md)
-
-For an objective baseline scan, use `python3` instead of `python` on
-macOS/Linux when `python` is unavailable:
-
-```powershell
-python scripts/harness_doctor.py --target .
-```
-
-### `/harness update`
-
-After a repository has adopted the harness, use `/harness update` to refresh the
-local `./harness-starter-kit` reference clone and selectively apply new harness
-guidance.
-
-Harness Update records the confirmed kit source in `.harness/source.json`,
-classifies update opportunities, and finishes with a Harness Update Report. It
-must not blindly overwrite target repository files.
-
-- Command workflow: [`commands/harness-update.md`](commands/harness-update.md)
-
-### `/harness refresh`
-
-After a repository has adopted the harness, use `/harness refresh` to review the
-existing target harness for stale docs, duplicated guidance, obsolete records,
-or unused checks.
-
-Harness Refresh classifies findings as keep, update, merge,
-archive/delete candidate, or manual review. It does not refresh the local kit
-reference and must not delete files without explicit approval.
-
-- Command workflow: [`commands/harness-refresh.md`](commands/harness-refresh.md)
-
-### `/harness review`
-
-Use `/harness review` to challenge the current change set from an opposing
-harness-engineering perspective before finishing.
-
-Harness Review is diagnostic by default. It checks for target source-of-truth
-violations, unnecessary automation, weak validation, missing durable memory,
-overreach, and stale or duplicated guidance. It must not modify files unless the
-user explicitly asks to apply fixes after seeing the review.
-
-Use `/harness review sub-agent` when you want to explicitly request a read-only
-reviewer subagent. It still falls back to single-agent review and reports why if
-the active runtime cannot call one.
-
-- Command workflow: [`commands/harness-review.md`](commands/harness-review.md)
-- Report template: [`docs/templates/harness-review-report.md`](docs/templates/harness-review-report.md)
-- Example report: [`docs/examples/harness-review-report.md`](docs/examples/harness-review-report.md)
+See [`commands/`](commands/) for full workflows:
+[`doctor`](commands/harness-doctor.md),
+[`update`](commands/harness-update.md),
+[`refresh`](commands/harness-refresh.md),
+and [`review`](commands/harness-review.md).
 
 ## How Adoption Works
 
@@ -199,27 +156,20 @@ the active runtime cannot call one.
 
 This is not primarily an automatic installer. The agent should inspect the
 target repository first, then adapt the smallest useful set of harness
-artifacts:
-
-- `AGENTS.md` for durable agent instructions
-- architecture constraints through linting, type checks, import boundaries, or
-  project-specific rules
-- feedback loops through tests, CI, pre-commit hooks, and clear failure messages
-- a knowledge store under `docs/` for decisions, failures, conventions, and
-  domain context
-- garbage-collection checks that detect code, document, and structure drift
+artifacts: instructions, enforceable constraints, feedback loops, durable
+memory, drift checks, and an adoption report. Follow
+[`docs/adoption-workflow.md`](docs/adoption-workflow.md) and the prompt in
+[`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md).
 
 Use the optional installer only when you want a skeleton before agent-driven
-adaptation:
+adaptation. It copies profile snippets into
+`docs/harness/profiles/<profile>` for review; prompt-first adoption reads
+profiles from the cloned kit at
+`harness-starter-kit/templates/profiles/<profile>`.
 
 ```powershell
 python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
-
-The optional installer never overwrites existing files unless `--force` is
-provided. It copies stack profile snippets into `docs/harness/profiles/<profile>`
-for review. During prompt-first adoption, agents read profile templates from the
-cloned kit under `harness-starter-kit/templates/profiles/<profile>`.
 
 Profiles shown in the badges above are conservative reference snippets, not
 automatic migrations. See [`docs/profiles.md`](docs/profiles.md) and
@@ -227,8 +177,6 @@ automatic migrations. See [`docs/profiles.md`](docs/profiles.md) and
 
 For the detailed documentation index, see
 [`docs/component-map.md`](docs/component-map.md). Common adoption references:
-[`docs/adoption-workflow.md`](docs/adoption-workflow.md),
-[`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md),
 [`docs/checklists/external-api-work.md`](docs/checklists/external-api-work.md),
 [`docs/checklists/decision-failure-memory.md`](docs/checklists/decision-failure-memory.md),
 and [`docs/checklists/verification-scripts.md`](docs/checklists/verification-scripts.md).
@@ -253,12 +201,6 @@ examples, translations, and dogfooding.
 <a href="https://github.com/baskduf/harness-starter-kit/graphs/contributors">
   <img src="https://readme-contribs.as93.net/contributors/baskduf/harness-starter-kit" alt="Contributors" />
 </a>
-
-## Core Principle
-
-Every recurring agent failure should be converted into at least one durable
-artifact: a clearer instruction, an automated constraint, a test or CI check, a
-decision or failure record, or a drift check.
 
 ## License
 
