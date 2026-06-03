@@ -15,8 +15,8 @@ policy; use a short report/check note for narrow fixes.
 
 - `go build ./...` to verify the module compiles.
 - `go vet ./...` for static analysis included in the Go toolchain.
-- `golangci-lint run` when the target project has `.golangci.yml` or
-  `.golangci.toml`. Do not add golangci-lint if it is absent.
+- `golangci-lint run` when the target project has `.golangci.yml`,
+  `.golangci.yaml`, or `.golangci.toml`. Do not add golangci-lint if it is absent.
 - `go test ./...` for unit tests. Add `-count=1` to disable test result caching
   when the results must reflect the current state.
 - `scripts/check_docs_drift.py` for stale documentation references.
@@ -37,7 +37,8 @@ If the target project has a code generation step, document the command in
 
 Copy or adapt `check_harness.py` into the target repository's `scripts/`
 directory when the project has no existing task runner. It runs `go vet`,
-`golangci-lint` when available, and the generic drift checks.
+`golangci-lint` when the target has a golangci-lint config, and the generic
+drift checks.
 
 ## Profile Absorption Notes
 
