@@ -44,7 +44,8 @@ def main() -> int:
     run(["go", "build", "./..."])
     run(["go", "vet", "./..."])
 
-    if shutil.which("golangci-lint"):
+    lint_configs = (".golangci.yml", ".golangci.yaml", ".golangci.toml")
+    if shutil.which("golangci-lint") and any((ROOT / name).exists() for name in lint_configs):
         run(["golangci-lint", "run"])
 
     if not args.skip_tests:
