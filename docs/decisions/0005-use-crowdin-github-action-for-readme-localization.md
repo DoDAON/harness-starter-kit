@@ -35,6 +35,11 @@ localized README names:
 - `README.ja.md`
 - `README.zh-CN.md`
 
+The workflow uploads existing localized README files before downloading
+translations. That seeds a new Crowdin project from the repository source of
+truth and prevents the first sync from exporting source-English fallback content
+over localized README invariants.
+
 Crowdin credentials are provided through repository secrets:
 
 - `CROWDIN_PROJECT_ID`
