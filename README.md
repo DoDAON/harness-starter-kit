@@ -31,6 +31,9 @@
   <a href="https://github.com/baskduf/harness_starter_kit_django/tree/main">
     <img alt="View Django dogfood repo" src="https://img.shields.io/badge/View-Django_Dogfood-092E20?style=for-the-badge&logo=django&logoColor=white" />
   </a>
+  <a href="https://github.com/baskduf/today-bus">
+    <img alt="View Next.js dogfood repo" src="https://img.shields.io/badge/View-Next.js_Dogfood-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+  </a>
 </p>
 
 ## Quick Start
@@ -243,10 +246,13 @@ Python, and TypeScript-oriented profiles. See
 [`docs/validation.md`](docs/validation.md) for coverage details and opt-in E2E
 checks.
 
-A live dogfooding target is
+Live dogfooding targets include
 [baskduf/harness_starter_kit_django](https://github.com/baskduf/harness_starter_kit_django),
 a small Django project used to test prompt-first adoption, `/harness update`,
-failure memory, and effectiveness tracking in a real repository.
+failure memory, and effectiveness tracking, and
+[baskduf/today-bus](https://github.com/baskduf/today-bus), a Next.js target
+used to exercise external API work, deterministic behavior checks, and
+dogfood review gates in a real repository.
 
 They do not prove that harness adoption reduces repeated agent mistakes. Use
 [`docs/evaluation.md`](docs/evaluation.md) and
