@@ -2,6 +2,66 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## v0.1.8 - 2026-06-03
+
+Patch release for failure-memory verification hardening and expanded dogfood
+context. This release turns failure notes and adoption-report failure memory
+from prose guidance into concrete, path-aware checks while preserving
+prompt-first adoption.
+
+### Added
+
+- `scripts/check_failure_memory.py`, plus generic template and CI wiring, to
+  validate `docs/failures/*.md` sections and require concrete detection or
+  prevention checks, or a practical no-check rationale.
+- Failure-memory fields in adoption reports, report templates, PR templates,
+  and review guidance that tie recorded failures to regression tests, fixtures,
+  smoke checks, lint rules, drift checks, CI gates, or manual review points.
+- Regression coverage for failure-memory section validation, concrete check
+  detection, package-script validation, missing path detection, and generic
+  template wiring.
+- Today Bus as a Next.js dogfood target in the README badge list and dogfood
+  target notes.
+
+### Changed
+
+- Extend `scripts/check_effectiveness_plan.py` to validate failure-memory
+  linkage in adoption reports, including referenced failure records, local
+  paths, and package scripts.
+- Update failure-note templates and existing failure records to name concrete
+  detection or prevention checks.
+- Expand adoption, review, update, validation, and checklist docs around
+  failure-memory verification and package-script checks.
+- Include `scripts/check_failure_memory.py` in documented validation commands
+  and generic harness CI.
+
+## v0.1.7 - 2026-06-02
+
+Patch release for deterministic behavior gate placement. This release adds
+durable guidance and checks so adoption reports explain which deterministic
+checks belong in normal completion gates and which remain focused or manual.
+
+### Added
+
+- Decision memory for placing deterministic behavior checks in normal,
+  focused, or manual verification gates.
+- Failure memory for deterministic behavior checks that stayed focused without
+  explicit gate-placement review.
+- Verification gate-placement fields in adoption reports, harness review report
+  templates, example reports, and profile adoption reports.
+- Regression coverage for gate-placement reporting, prompt drift, and repository
+  hygiene.
+
+### Changed
+
+- Extend `scripts/check_effectiveness_plan.py`, plus the generic template copy,
+  to require `## Verification Gate Placement` fields in adoption reports.
+- Expand adoption workflow, `/harness review`, `/harness refresh`,
+  verification-script checklist, and adoption prompt guidance for gate
+  placement.
+- Update localized README files and the static site Quick Start wording to
+  mention gate placement alongside failure memory and effectiveness tracking.
+
 ## v0.1.6 - 2026-06-02
 
 Patch release for practical verification guidance and decision-memory
