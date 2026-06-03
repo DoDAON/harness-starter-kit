@@ -77,9 +77,6 @@ translated README files, and opens a translation pull request.
 `crowdin.yml` maps Crowdin language output to the repository's existing
 localized README filenames: `README.ko.md`, `README.ja.md`, and
 `README.zh-CN.md`.
-The workflow also uploads the existing localized README files before
-downloading translations so a new Crowdin project is seeded from the repository
-source of truth instead of exporting source-English fallback content.
 
 The workflow intentionally runs only on `main` pushes that affect localization
 setup or through manual `workflow_dispatch`. It does not run on pull requests.

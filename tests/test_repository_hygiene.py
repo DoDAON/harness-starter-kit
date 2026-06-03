@@ -102,7 +102,6 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("uses: crowdin/github-action@v2", workflow)
         self.assertIn("config: crowdin.yml", workflow)
         self.assertIn("upload_sources: true", workflow)
-        self.assertIn("upload_translations: true", workflow)
         self.assertIn("download_translations: true", workflow)
         self.assertIn("create_pull_request: true", workflow)
         self.assertIn("contents: write", workflow)
@@ -124,11 +123,9 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("README.ko.md", validation)
         self.assertIn("README.ja.md", validation)
         self.assertIn("README.zh-CN.md", validation)
-        self.assertIn("uploads the existing localized README files", validation)
         self.assertIn("crowdin.yml", component_map)
         self.assertIn("does not run on pull request events", decision)
         self.assertIn("two_letters_code", decision)
-        self.assertIn("uploads existing localized README files", decision)
 
     def test_effectiveness_measurement_is_wired_into_adoption_flow(self) -> None:
         adoption_report = (
