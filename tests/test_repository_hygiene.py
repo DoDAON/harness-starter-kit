@@ -686,7 +686,7 @@ class RepositoryHygieneTests(unittest.TestCase):
         for filename in ("README.ko.md", "README.ja.md", "README.zh-CN.md"):
             with self.subTest(readme=filename):
                 localized = (REPO_ROOT / filename).read_text(encoding="utf-8")
-                self.assertIn("### `/harness review`", localized)
+                self.assertIn("| `/harness review` |", localized)
                 self.assertIn("/harness review sub-agent", localized)
                 self.assertIn("commands/harness-review.md", localized)
                 self.assertLess(
