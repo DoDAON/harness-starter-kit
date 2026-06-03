@@ -66,6 +66,23 @@ post-push, or unknown.
 - Some small fixes may need one extra final-report line when automation is not
   practical, but mechanically testable bug paths should not stop at prose.
 
+## Known Limits And Follow-Up
+
+- Path-existence validation confirms that cited local test, fixture, script,
+  workflow, or checklist files exist, but it does not prove that the cited check
+  asserts the specific failure axis.
+- Command-shaped checks such as `npm run test:planner` are recognized by shape,
+  but the checker does not yet verify that the command exists in the target
+  package manager or task runner configuration.
+- Detection-link validation is regex-based. It blocks known non-committal
+  phrases, but future wording may require additional test cases.
+- Generic command coverage is still biased toward common JavaScript and Python
+  commands. Add explicit coverage before relying on this gate for Go, Rust,
+  Java, .NET, or Gradle-heavy targets.
+- Target repositories with pre-existing non-kit `docs/failures/*.md` schemas
+  may need adoption-specific adaptation instead of blindly applying the generic
+  checker.
+
 ## Agent Guidance
 
 When fixing a recurring failure, do not stop after adding `docs/failures/*.md`.
