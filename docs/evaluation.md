@@ -109,3 +109,4 @@ cheaper to correct after the harness becomes part of the repository.
 ## Example Evidence Passes
 
 - [Small harness outcome evidence report](examples/effectiveness-report-small-evidence.md) records three harnessed task outcomes and summarizes a narrow operational evidence pass without treating Harness Doctor scores or passing checks as proof of agent effectiveness.
+- [TodayBus harnessed-only dogfood benchmark](examples/effectiveness-report-todaybus-dogfood.md) records three product-task outcomes, excludes a non-comparable setup run, and treats the result as an initial benchmark rather than proof of effectiveness improvement.
