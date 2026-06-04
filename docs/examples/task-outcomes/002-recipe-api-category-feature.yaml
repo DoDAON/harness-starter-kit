@@ -1,0 +1,72 @@
+schema_version: 1
+
+target:
+  repository: jihwan4155/recipe-api
+  repository_ref: jihwan4155/recipe-api@99af81bf0da4a8bfecb19e5ca0af817b276f49b6
+  stack_or_framework: Django REST Framework
+  date: 2026-06-03
+  agent_or_model: AI coding agent
+  reviewer: human maintainer
+
+task:
+  id: recipe-api-add-category-feature
+  run_id: recipe-api-002
+  prompt_summary: Add Category support to the Recipe API.
+  prompt_ref: local feature prompt requiring AGENTS.md and docs review
+  prompt_hash: not recorded
+  comparable_task_group: django-model-api-change
+  condition: harnessed-only
+  expected_boundary:
+    - recipes/models.py
+    - recipes/admin.py
+    - recipes/serializers.py
+    - recipes/tests.py
+    - recipes/migrations/**
+    - README.md
+    - docs/domain/glossary.md
+    - docs/decisions/**
+  known_failure_mode: Model changes without migrations, missing durable decision memory, or API docs drift.
+
+harness_context:
+  harness_doctor_score: recorded locally but not treated as effectiveness proof
+  harness_source:
+    kit_url: https://github.com/baskduf/harness-starter-kit
+    kit_commit: baskduf/harness-starter-kit@94e416b354facffafead6bbb9691af1598139389
+    source_tracking_ref: recipe-api/harness-starter-kit
+  relevant_instructions:
+    - AGENTS.md
+    - docs/conventions/coding.md
+  relevant_constraints:
+    - python manage.py makemigrations --check --dry-run
+    - python manage.py check
+    - python manage.py test
+    - python scripts/check_decision_memory.py --fail-on-warning
+  relevant_memory_records:
+    - docs/decisions/001-initial-api-design.md
+    - docs/decisions/003-add-recipe-categories.md
+    - docs/domain/glossary.md
+
+outcome:
+  files_changed:
+    - recipes/models.py
+    - recipes/admin.py
+    - recipes/serializers.py
+    - recipes/tests.py
+    - recipes/migrations/0002_category_recipe_category.py
+    - README.md
+    - docs/domain/glossary.md
+    - docs/decisions/003-add-recipe-categories.md
+  wrong_file_edits: 0
+  repeated_known_mistake: false
+  verification_command: python manage.py check && python manage.py test && python manage.py makemigrations --check --dry-run
+  first_pass_verification:
+    result: passed_with_review_gap
+  drift_violations_detected: []
+  human_rework_minutes: 15
+  reverted_files: []
+  notes: Agent respected file boundaries and created migration plus decision memory. Review found missing PATCH tests for assigning and clearing category_id.
+
+follow_up:
+  harness_change_needed: false
+  decision_or_failure_record: docs/decisions/003-add-recipe-categories.md
+  include_in_effectiveness_report: true

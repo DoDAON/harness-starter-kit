@@ -95,3 +95,7 @@ Treat the data as operational evidence, not a controlled scientific study. Small
 repositories and changing agents can introduce noise. The useful signal is
 whether the same classes of mistakes become less frequent, easier to detect, or
 cheaper to correct after the harness becomes part of the repository.
+
+## Example Evidence Passes
+
+- [Small harness outcome evidence report](examples/effectiveness-report-small-evidence.md) records three harnessed task outcomes and summarizes a narrow operational evidence pass without treating Harness Doctor scores or passing checks as proof of agent effectiveness.

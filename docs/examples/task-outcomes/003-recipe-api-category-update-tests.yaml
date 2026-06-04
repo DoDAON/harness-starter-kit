@@ -1,0 +1,58 @@
+schema_version: 1
+
+target:
+  repository: jihwan4155/recipe-api
+  repository_ref: jihwan4155/recipe-api@99af81bf0da4a8bfecb19e5ca0af817b276f49b6
+  stack_or_framework: Django REST Framework
+  date: 2026-06-03
+  agent_or_model: AI coding agent
+  reviewer: human maintainer
+
+task:
+  id: recipe-api-category-update-test-hardening
+  run_id: recipe-api-003
+  prompt_summary: Add PATCH tests for assigning and clearing recipe categories, and fix truncated dependency ADR.
+  prompt_ref: local review follow-up prompt
+  prompt_hash: not recorded
+  comparable_task_group: django-test-hardening
+  condition: harnessed-only
+  expected_boundary:
+    - recipes/tests.py
+    - docs/decisions/002-use-requirements-file.md
+  known_failure_mode: Incomplete test coverage for documented PUT/PATCH behavior and truncated decision record.
+
+harness_context:
+  harness_doctor_score: recorded locally but not treated as effectiveness proof
+  harness_source:
+    kit_url: https://github.com/baskduf/harness-starter-kit
+    kit_commit: baskduf/harness-starter-kit@94e416b354facffafead6bbb9691af1598139389
+    source_tracking_ref: recipe-api/harness-starter-kit
+  relevant_instructions:
+    - AGENTS.md
+    - docs/conventions/coding.md
+  relevant_constraints:
+    - python manage.py check
+    - python manage.py test
+    - python scripts/check_docs_drift.py
+  relevant_memory_records:
+    - docs/decisions/002-use-requirements-file.md
+    - docs/decisions/003-add-recipe-categories.md
+
+outcome:
+  files_changed:
+    - recipes/tests.py
+    - docs/decisions/002-use-requirements-file.md
+  wrong_file_edits: 0
+  repeated_known_mistake: false
+  verification_command: python manage.py check && python manage.py test && python scripts/check_docs_drift.py
+  first_pass_verification:
+    result: passed
+  drift_violations_detected: []
+  human_rework_minutes: 5
+  reverted_files: []
+  notes: Follow-up tightened test coverage and completed a truncated ADR without broad rewrites.
+
+follow_up:
+  harness_change_needed: false
+  decision_or_failure_record: Existing ADR updated.
+  include_in_effectiveness_report: true
