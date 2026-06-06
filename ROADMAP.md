@@ -23,11 +23,13 @@ This is the preferred order for near-term work. It is a sequencing guide, not a
 promise that every item belongs in the next release.
 
 1. Strengthen adoption evidence before adding larger features.
-2. Improve governance commands, especially review and maintenance workflows.
-3. Use review findings to shape policy-driven enforcement.
-4. Add optional runtime or CI adapters only after the portable checks and
+2. Exercise the new task-outcome evidence decision gate on real substantial
+   harness work before adding a separate evidence command.
+3. Improve governance commands, especially review and maintenance workflows.
+4. Use review findings to shape policy-driven enforcement.
+5. Add optional runtime or CI adapters only after the portable checks and
    policy workflow are clear.
-5. Grow stack profiles only when they have fixtures, smoke coverage, and a
+6. Grow stack profiles only when they have fixtures, smoke coverage, and a
    clear local verification path.
 
 ## Adoption Evidence
@@ -51,6 +53,47 @@ Each example should document what was adopted, adapted, skipped, and verified.
 Add practical effectiveness measurement examples using the existing report
 template.
 
+The next evidence pass should use the task-outcome decision gate from
+`docs/decisions/0006-trigger-task-outcome-evidence-for-substantial-harness-work.md`.
+Record or explicitly skip task outcome evidence for substantial harness work,
+then review whether the trigger list produces useful records without becoming
+paperwork. Useful pilot tasks include a profile update, a checker update, a
+governance-command refinement, and a dogfood adoption or update. Keep
+harness-maintenance records out of comparable product-task counts unless they
+are true product-task runs.
+
+## Operational Evidence Loop
+
+The first step of the operational evidence loop is now in place: substantial
+harness work must decide whether task outcome evidence should be recorded, and
+included task outcome records are checked for comparable evidence fields.
+
+The remaining work is to prove that the loop is useful in practice before
+turning it into another command or a heavier reporting system.
+
+Near-term milestones:
+
+1. Apply the evidence decision gate to 3-5 substantial harness changes, such as
+   a profile update, checker update, governance-command refinement, and dogfood
+   adoption or update.
+2. For each substantial change, record a task outcome or state a skip reason in
+   the final report. Keep trivial docs-only, typo, link-label, and formatting
+   work out of task outcome records.
+3. When a recorded task outcome shows a miss, convert it into the smallest
+   durable harness improvement: an instruction update, check, gate-placement
+   change, decision record, failure record, or refresh candidate.
+4. After several records exist, write a maintenance evidence report that
+   summarizes recorded outcomes, skipped outcomes, first-pass verification,
+   wrong-file edits, drift detections, human rework, and which observations
+   changed the harness.
+5. Only after that report exists, decide whether `/harness evidence` or a
+   dedicated evidence checklist is worth adding.
+
+Report templates should be adjusted only after the pilot shows the field shape
+is stable. The likely minimal addition is a `Task Outcome Evidence` field that
+records `recorded in <path>` or `skipped because <reason>` without requiring
+YAML for every task.
+
 ## Practical Verification Patterns
 
 Recent adoption feedback says the kit is useful as a completion safety belt but
@@ -60,9 +103,12 @@ framework-specific fixer.
 
 Recent additions cover external API checklists, provider-boundary fixture
 guidance, Next.js App Router notes, failure-memory verification, decision-memory
-warnings, and deterministic behavior gate placement. Useful next additions
-include:
+warnings, deterministic behavior gate placement, and trigger-based task outcome
+evidence. Useful next additions include:
 
+- command existence validation for `make`, `just`, Maven, Gradle, Go, and other
+  profile-relevant task runners referenced by failure-memory or effectiveness
+  records
 - more fixture-backed examples for provider-specific request shape, response
   envelopes, redaction, zero-result behavior, and provider errors
 - clearer ADR and failure-record boundary examples for small changes so
@@ -82,6 +128,9 @@ the starter kit into an automatic rewrite system.
   from real target repository use.
 - Improve diagnostics for durable-memory gaps, gate placement, and review timing
   without making the commands mutate files by default.
+- Document and refine the fix-and-re-review loop for `/harness review` and
+  `/harness review sub-agent` after more target diffs show that the loop reaches
+  no actionable findings.
 
 The review command should use a separate reviewer perspective or subagent when
 the environment supports it. Its job is not to continue implementation, but to
@@ -117,6 +166,11 @@ policy.
 Policy work should follow adoption evidence and review-command experience. The
 review workflow should help identify which rules are worth proposing for
 stronger enforcement.
+
+Do not add a new `/harness evidence` command yet. First collect several
+substantial-work task outcomes and at least one aggregate maintenance evidence
+report so the command can be shaped by observed records rather than assumed
+workflow needs.
 
 ## Optional Runtime And CI Adapters
 
@@ -164,3 +218,8 @@ repository already has macOS CI.
 ## Related Decisions
 
 - `docs/decisions/0001-prompt-first-adoption.md`
+- `docs/decisions/0002-configurable-decision-memory-warning.md`
+- `docs/decisions/0003-review-gate-placement-for-deterministic-behavior-checks.md`
+- `docs/decisions/0004-link-failure-memory-to-regression-checks.md`
+- `docs/decisions/0005-validate-dogfood-evidence-consistency.md`
+- `docs/decisions/0006-trigger-task-outcome-evidence-for-substantial-harness-work.md`
