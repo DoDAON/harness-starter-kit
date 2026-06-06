@@ -68,14 +68,21 @@ The first step of the operational evidence loop is now in place: substantial
 harness work must decide whether task outcome evidence should be recorded, and
 included task outcome records are checked for comparable evidence fields.
 
+The pilot now has two harness-maintenance task outcome records:
+`004-evidence-decision-gate.yaml` and
+`005-make-just-command-validation.yaml`. Both are useful evidence that the loop
+can capture substantial checker and policy work, but they are still
+harness-maintenance observations, not product-task effectiveness proof.
+
 The remaining work is to prove that the loop is useful in practice before
 turning it into another command or a heavier reporting system.
 
 Near-term milestones:
 
-1. Apply the evidence decision gate to 3-5 substantial harness changes, such as
-   a profile update, checker update, governance-command refinement, and dogfood
-   adoption or update.
+1. Continue applying the evidence decision gate until at least 3-5 substantial
+   harness changes have records or explicit skip reasons. The next useful
+   pilots should be a profile update, governance-command refinement, and
+   dogfood adoption or update rather than another checker-only change.
 2. For each substantial change, record a task outcome or state a skip reason in
    the final report. Keep trivial docs-only, typo, link-label, and formatting
    work out of task outcome records.
@@ -103,8 +110,9 @@ framework-specific fixer.
 
 Recent additions cover external API checklists, provider-boundary fixture
 guidance, Next.js App Router notes, failure-memory verification, decision-memory
-warnings, deterministic behavior gate placement, and trigger-based task outcome
-evidence. Useful next additions include:
+warnings, deterministic behavior gate placement, trigger-based task outcome
+evidence, and root `make`/`just` command-reference validation. Useful next
+additions include:
 
 - command existence validation beyond package scripts, root `make` targets, and
   root `just` recipes for Maven, Gradle, Go, and other profile-relevant task
