@@ -89,6 +89,16 @@ memory, and effectiveness measurement workflows in a real target repository.
 This is operational evidence, not proof that harness adoption reduces agent
 mistakes by itself. Record comparable task outcomes in effectiveness reports.
 
+## Dogfood Benchmarks
+
+Additional dogfood reports record harnessed-only target outcomes without
+claiming effectiveness improvement:
+
+- [TodayBus harnessed-only dogfood benchmark](examples/effectiveness-report-todaybus-dogfood.md)
+  for a Next.js public-data target
+- [Harness ERP Spring/Maven dogfood benchmark](examples/effectiveness-report-harness-erp-dogfood.md)
+  for a Spring Boot backend target
+
 ## Example Reports
 
 Use these examples when checking whether a target adoption report is complete:

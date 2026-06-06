@@ -36,6 +36,9 @@
   <a href="https://github.com/baskduf/today-bus">
     <img alt="View Next.js dogfood repo" src="https://img.shields.io/badge/View-Next.js_Dogfood-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
   </a>
+  <a href="https://github.com/baskduf/harness-erp">
+    <img alt="View Spring Boot dogfood repo" src="https://img.shields.io/badge/View-Spring_Boot_Dogfood-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
+  </a>
 </p>
 
 A prompt-first starter kit for turning repeated coding-agent mistakes into
@@ -194,6 +197,13 @@ They do not prove that harness adoption reduces repeated agent mistakes. Use
 and [`docs/templates/task-outcome.yaml`](docs/templates/task-outcome.yaml) to
 measure comparable tasks, wrong-file edits, first-pass verification, and human
 rework.
+
+Dogfood reports include
+[`TodayBus`](docs/examples/effectiveness-report-todaybus-dogfood.md) for a
+Next.js public-data target and
+[`Harness ERP`](docs/examples/effectiveness-report-harness-erp-dogfood.md) for
+a Spring/Maven backend target. Both are harnessed-only benchmarks, not proof of
+effectiveness improvement.
 
 </details>
 

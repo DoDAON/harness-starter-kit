@@ -115,6 +115,44 @@ Limitations:
 - This dogfood validated checklist usefulness for one external API target. It
   did not prove broader agent effectiveness or reduced human rework.
 
+## Harness ERP Spring/Maven Dogfood
+
+A `harness-erp` Spring Boot target was used as a backend dogfood case after the
+Spring profile and effectiveness tracking workflow were in place. The target
+exercised source tracking, local Maven verification, service-layer business
+rules, decision memory, failure memory, and task outcome aggregation across
+five comparable product tasks.
+
+Successful behaviors:
+
+- recorded `.harness/source.json` with the kit path, remote, commit, profile,
+  and setup prompt reference
+- used `python scripts/check_harness.py` as the normal completion gate, with
+  Maven tests plus docs and structure drift checks
+- preserved ERP-001 through ERP-005 task outcome records with prompt hashes,
+  repository refs, first-pass verification, final verification, and changed
+  file boundaries
+- counted ERP-004 fixture-only edits outside the strict expected boundary as a
+  wrong-file edit instead of hiding the boundary miss
+- recorded the Spring Boot `4.0.6.RELEASE` coordinate failure in the target
+  failure memory and linked it to `python scripts/check_harness.py` /
+  `./mvnw test`
+
+Finding:
+
+- The first adoption evidence pass treated a non-comparable setup fix as
+  excluded from metrics but did not immediately add failure memory. Follow-up
+  review corrected that evidence gap and reinforced the rule that failed setup
+  checks may still need durable failure records even when excluded from
+  comparable product-task counts.
+
+Limitations:
+
+- This dogfood is a harnessed-only initial backend benchmark. It does not prove
+  broader agent effectiveness or reduced human rework.
+- Prompt hashes are preserved in task outcome records, but prompt text was local
+  to the dogfood environment rather than stored in this kit.
+
 ## Starter Kit Findings
 
 The pilots found one documentation ambiguity:
