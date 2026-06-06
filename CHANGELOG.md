@@ -2,6 +2,45 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## v0.1.9 - 2026-06-06
+
+Patch release for operational evidence tracking, Go profile coverage, and
+command-reference validation. This release strengthens the kit's ability to
+collect trustworthy agent-work evidence without turning the starter kit into a
+heavier automation framework.
+
+### Added
+
+- Go profile guidance, fixture coverage, smoke-test wiring, and README/profile
+  documentation so Go targets have a conservative local verification path.
+- Task outcome evidence decision guidance for substantial harness work,
+  including required evidence fields for included task outcome records.
+- Dogfood and effectiveness evidence reports for Today Bus, Harness ERP, and
+  small evidence-pass scenarios, plus task outcome examples for harness
+  adoption and maintenance work.
+- Failure records and decision memory for dogfood evidence consistency and
+  first-pass task outcome evidence gaps.
+- Google site verification, sitemap, robots, and static-site metadata updates.
+
+### Changed
+
+- Extend `scripts/check_effectiveness_plan.py`, plus the generic template copy,
+  to validate task outcome evidence fields and reject contradictory or stale
+  effectiveness-report completion language.
+- Extend `scripts/check_failure_memory.py` and
+  `scripts/check_effectiveness_plan.py`, plus generic template copies, to
+  validate root `make` targets and root `just` recipes referenced by
+  failure-memory records, adoption reports, and task outcome verification
+  commands.
+- Strengthen dogfood evidence validation, effectiveness templates, adoption
+  evidence checklists, roadmap guidance, and evaluation docs around operational
+  evidence loops.
+- Refresh README, localized README files, contributor visuals, profile lists,
+  validation docs, and lifecycle pilot notes to match the current evidence and
+  profile coverage.
+- Revert the Crowdin localization sync path while preserving localized README
+  consistency.
+
 ## v0.1.8 - 2026-06-03
 
 Patch release for failure-memory verification hardening and expanded dogfood
