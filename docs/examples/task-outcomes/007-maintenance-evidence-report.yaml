@@ -1,0 +1,65 @@
+schema_version: 1
+
+target:
+  repository: baskduf/harness-starter-kit
+  repository_ref: main working tree based on cdd93069c83ba15c9a4361c5f20db7cdce3b850d
+  stack_or_framework: Python and Markdown harness kit
+  date: 2026-06-07
+  agent_or_model: Codex
+  reviewer: Codex primary agent
+
+task:
+  id: maintenance-evidence-report
+  run_id: harness-starter-kit-007
+  prompt_summary: Aggregate maintenance evidence from task outcome records 004 through 006.
+  prompt_ref: current Codex thread request to proceed with maintenance evidence report item 1
+  prompt_hash: not recorded
+  comparable_task_group: harness-maintenance
+  condition: harnessed-only
+  expected_boundary:
+    - ROADMAP.md
+    - docs/evaluation.md
+    - docs/examples/maintenance-evidence-report.md
+    - docs/examples/task-outcomes/007-maintenance-evidence-report.yaml
+  known_failure_mode: Individual harness-maintenance task outcome records accumulate without an aggregate report that separates operational evidence from product-task effectiveness claims.
+
+harness_context:
+  harness_doctor_score: previously 98/100, not treated as effectiveness proof
+  harness_source:
+    kit_url: https://github.com/baskduf/harness-starter-kit
+    kit_commit: cdd93069c83ba15c9a4361c5f20db7cdce3b850d
+    source_tracking_ref: none; this repository is the kit source
+  relevant_instructions:
+    - AGENTS.md
+    - ROADMAP.md
+    - docs/evaluation.md
+  relevant_constraints:
+    - python3 scripts/check_docs_drift.py
+    - python3 scripts/check_encoding_hygiene.py
+    - python3 scripts/check_effectiveness_plan.py
+    - python3 -m unittest tests.test_check_effectiveness_plan tests.test_repository_hygiene
+  relevant_memory_records:
+    - docs/decisions/0006-trigger-task-outcome-evidence-for-substantial-harness-work.md
+    - docs/failures/0007-dogfood-first-pass-failures-lacked-memory-decision.md
+
+outcome:
+  files_changed:
+    - ROADMAP.md
+    - docs/evaluation.md
+    - docs/examples/maintenance-evidence-report.md
+    - docs/examples/task-outcomes/007-maintenance-evidence-report.yaml
+  wrong_file_edits: 0
+  repeated_known_mistake: false
+  verification_command: python3 scripts/check_docs_drift.py && python3 scripts/check_encoding_hygiene.py && python3 scripts/check_effectiveness_plan.py && python3 -m unittest tests.test_check_effectiveness_plan tests.test_repository_hygiene
+  first_pass_verification:
+    result: passed
+  drift_violations_detected: []
+  human_rework_minutes: 0
+  reverted_files: []
+  notes: This report aggregates task outcome records 004 through 006 and keeps harness-maintenance observations separate from product-task effectiveness claims.
+
+follow_up:
+  harness_change_needed: false
+  decision_or_failure_record: no new decision or failure record; this implements the aggregation step already planned in ROADMAP.md and ADR 0006.
+  include_in_effectiveness_report: false
+  include_in_comparable_product_task_count: false

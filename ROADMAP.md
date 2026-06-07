@@ -76,11 +76,12 @@ The pilot now has three harness-maintenance task outcome records:
 the loop can capture substantial checker and policy work, but they are still
 harness-maintenance observations, not product-task effectiveness proof.
 
-The remaining work is to prove that the loop is useful across different kinds
-of harness work before turning it into another command or a heavier reporting
-system. The third checker pilot included a real-project smoke pass with a Go
-module and Spring Framework Maven/Gradle projects; the next pilots should test
-whether the evidence shape still helps for less checker-shaped work.
+The first maintenance evidence report now aggregates the three initial
+harness-maintenance records and preserves the decision to keep the
+`/harness evidence` command deferred. The third checker pilot included a
+real-project smoke pass with a Go module and Spring Framework Maven/Gradle
+projects; the next pilots should test whether the evidence shape still helps
+for less checker-shaped work.
 
 Near-term milestones:
 
@@ -95,12 +96,12 @@ Near-term milestones:
 3. When a recorded task outcome shows a miss, convert it into the smallest
    durable harness improvement: an instruction update, check, gate-placement
    change, decision record, failure record, or refresh candidate.
-4. After several records exist, write a maintenance evidence report that
-   summarizes recorded outcomes, skipped outcomes, first-pass verification,
+4. After at least two non-checker pilots exist, update the maintenance evidence
+   report with recorded outcomes, skipped outcomes, first-pass verification,
    wrong-file edits, drift detections, human rework, and which observations
    changed the harness.
-5. Only after that report exists, decide whether `/harness evidence` or a
-   dedicated evidence checklist is worth adding.
+5. Only after that broader report exists, decide whether `/harness evidence` or
+   a dedicated evidence checklist is worth adding.
 
 Report templates should be adjusted only after the pilot shows the field shape
 is stable. The likely minimal addition is a `Task Outcome Evidence` field that
@@ -183,10 +184,11 @@ Policy work should follow adoption evidence and review-command experience. The
 review workflow should help identify which rules are worth proposing for
 stronger enforcement.
 
-Do not add a new `/harness evidence` command yet. First collect several
-substantial-work task outcomes and at least one aggregate maintenance evidence
-report so the command can be shaped by observed records rather than assumed
-workflow needs.
+Do not add a new `/harness evidence` command yet. The first aggregate
+maintenance evidence report exists, but it mostly covers checker-oriented work.
+Collect several substantial-work task outcomes including non-checker pilots so
+the command can be shaped by observed records rather than assumed workflow
+needs.
 
 ## Optional Runtime And CI Adapters
 
