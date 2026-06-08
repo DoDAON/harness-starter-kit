@@ -2,6 +2,14 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## Unreleased
+
+### Added
+
+- Rust profile guidance, fixture coverage, smoke-test wiring, installer
+  coverage, and README/profile documentation so Rust crate and Cargo workspace
+  targets have a conservative local verification path.
+
 ## v0.1.10 - 2026-06-08
 
 Patch release for Harness Doctor v2. This release turns Doctor from a flat
