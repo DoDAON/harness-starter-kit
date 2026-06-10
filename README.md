@@ -43,6 +43,9 @@
   </a>
 </p>
 
+
+# Harness Starter Kit
+
 A prompt-first starter kit for turning repeated coding-agent mistakes into
 durable repository instructions, checks, memory, and evaluation.
 
